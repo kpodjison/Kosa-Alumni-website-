@@ -1,0 +1,38 @@
+*{
+    font-family:verdana,Geneve,Tahoma,sans-serif;
+}
+:root{
+    --shadow:0 1px 5px rgba(104, 104,104, 0.8 );
+}
+nav{
+    background:#00b8e6 ;
+    /* #9d0000; */
+
+    /* #ffffe6; */
+}
+nav a{
+    color:#000;
+}
+.knav a:hover{
+    background:#000;
+   color: #00b8e6;
+   
+}
+.search_btn{
+    background: #000;
+    color: #00b8e6;
+}
+.search_btn:hover{
+    background:#fff;
+    color: #000;
+}
+footer{
+    background: #000;
+    color:#00b8e6;
+    font-size: 28px;
+    height: 40px;
+    text-align: center;
+}
+
+/* ************************************** About Us Style************************************************  */
+

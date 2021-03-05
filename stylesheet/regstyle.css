@@ -1,0 +1,240 @@
+*{
+    font-family:verdana,Geneve,Tahoma,sans-serif;
+}
+:root{
+    --shadow:0 1px 5px rgba(104, 104,104, 0.8 );
+}
+body{
+    background: rgb(0, 0, 0);
+}
+
+.wrapper{
+    background:url(../images/union.jpg);
+    background-position: center;
+    
+}
+.greetings{
+    text-align: center;
+    background: #0004;
+    color: #fff;
+    font-size: 25px;
+}
+
+/* ********************************* start of registration form*********************************** */
+.innercontainer{
+    background: linear-gradient(to right,#00b8e6  28%,#000 28%,#000 40%); 
+    margin: 20px 20px 0px 200px;
+     width:800px;
+     height:900px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 50px;
+}
+.innercontainer p{
+    color:#fff;
+    font-size: 28px;
+    background: #0004;
+}
+.formdiv{
+    margin: 20px 20px 10px 220px;
+}
+lable{
+    color:#fff;
+    font: 26px;
+}
+/* ********************************* end of registration form*********************************** */
+
+
+
+/* ********************************** Responsiveness************************************** */
+
+@media screen and (max-width: 1100px)
+{
+    .greetings{
+        text-align: center;
+        background: #0004;
+        color: #fff;
+        font-size: 20px;
+    }    
+    
+     .innercontainer{
+      background: linear-gradient(to right,#00b8e6  28%,#000 28%,#000 40%); 
+    margin: 20px 20px 0px 180px;
+     width:750px;
+     height:900px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 50px;
+    } 
+        .innercontainer p{
+    color:#fff;
+    font-size: 20px;
+    background: #0004;
+}
+}
+
+
+@media screen and (max-width: 990px)
+{
+    .greetings{
+        text-align: center;
+        background: #0004;
+        color: #fff;
+        font-size: 20px;
+    }
+    
+    
+     .innercontainer{
+        background: linear-gradient(to right,#00b8e6  28%,#000 28%,#000 40%); 
+    margin: 20px 20px 0px 140px;
+     width:700px;
+     height:900px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 50px;
+    } 
+    .innercontainer p{
+    color:#fff;
+    font-size: 20px;
+    background: #0004;
+}
+}
+
+
+@media screen and (max-width: 900px)
+{
+    .greetings{
+        text-align: center;
+        background: #0004;
+        color: #fff;
+        font-size: 20px;
+    }
+  
+    
+     .innercontainer{
+        background: linear-gradient(to right,#00b8e6  28%,#000 28%,#000 40%); 
+    margin: 20px 20px 0px 100px;
+     width:700px;
+     height:900px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 50px;
+    } 
+    .innercontainer p{
+    color:#fff;
+    font-size: 20px;
+    background: #0004;
+  } 
+    .formdiv a{
+        font-size: 13px;;
+    }
+}
+
+
+
+@media screen and (max-width: 700px)
+{
+    .greetings{
+        text-align: center;
+        background: #0004;
+        color: #fff;
+        font-size: 20px;
+    }
+  
+    
+     .innercontainer{
+        background: linear-gradient(to right,#00b8e6  28%,#000 28%,#000 40%); 
+    margin: 20px 15px 0px 50px;
+     width:660px;
+     height:900px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 50px;
+    } 
+    .innercontainer p{
+    color:#fff;
+    font-size: 20px;
+    background: #0004;
+  } 
+    .formdiv a{
+        font-size: 13px;;
+    }
+}
+
+
+
+
+@media screen and (max-width: 630px)
+{
+    .greetings{
+        text-align: center;
+        background: #0004;
+        color: #fff;
+        font-size: 20px;
+    }
+  
+    
+     .innercontainer{
+        background: linear-gradient(to right,#00b8e6  28%,#000 28%,#000 40%); 
+    margin: 20px 15px 0px 100px;
+     width:400px;
+     height:750px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 15px;
+    } 
+    .innercontainer p{
+    color:#fff;
+    font-size: 20px;
+    background: #0004;
+  } 
+    .formdiv {
+        font-size: 13px;
+         margin: 20px 10px 10px 100px;
+    }
+}
+
+
+@media screen and (max-width: 530px)
+{
+    .greetings{
+        text-align: center;
+        background: #0004;
+        color: #fff;
+        font-size: 20px;
+    }
+  
+    
+     .innercontainer{
+        background: linear-gradient(to right,#00b8e6  24%,#000 24%,#000 40%); 
+    margin: 20px 15px 0px 35px;
+     width:370px;
+     height:750px;
+    box-sizing:border-box;
+    box-shadow: var(--shadow);
+    padding: 15px;
+    } 
+    .innercontainer p{
+    color:#fff;
+    font-size: 20px;
+    background: #0004;
+  } 
+    .formdiv {
+        font-size: 13px;
+         margin: 20px 10px 10px 80px;
+    }
+     .formdiv a{
+        
+         margin: 0px 0px 0px 15px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
