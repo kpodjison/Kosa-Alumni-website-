@@ -323,8 +323,8 @@ footer{
                     <li>In order to ensure contributions are recorded correctly in the system,
                         admin must first <a href="beneficiary.php">Create Beneficiary </a>
                       </li>
-                    <li>Please ensure you input  <b>exact firstname</b>, <b>lastname</b> and <b>Type of Benefit</b> 
-                        (this can be selected from a list of types) of beneficiary when you are inserting contributions 
+                    <li>You can select <b> firstname</b>, <b>lastname</b> and <b>Type of Benefit</b> 
+                        of beneficiary from a dropdown list of all beneficiaries when you are inserting contributions 
                         from a registered member by clicking  <b>Contribute</b>. 
                       </li>
                     <li>The above instruction will ensure that the system keeps record of the 
@@ -576,7 +576,7 @@ footer{
                   
                   
                   //vars to hold email and password
-                  $cont_firstname = $cont_lastname =  $ben_firstname = $ben_lastname = $ben_type = $amount_con = $creator = "";
+                  $cont_firstname = $cont_lastname = $cont_id = $ben_type = $amount_con = $creator = "";
                   // vars to hold error messages
                   $firstname_err = $lastname_err = $phone_num_err = $email_err = $password_err = "";
 
@@ -587,13 +587,14 @@ footer{
 
                     // search for details of alumni from db
                     $alumni_id = $_GET['alumni_id'];
+                    $cont_id = $alumni_id;
                     $get_alumni = "SELECT * FROM alumni WHERE id= '$alumni_id' ";
                     $results = mysqli_query($conn,$get_alumni);
                     if(mysqli_num_rows($results) > 0){
                       
                       if($row = mysqli_fetch_assoc($results))
                        $cont_firstname = $row['firstname'];
-                      $cont_lastname = $row['lastname'];
+                      $cont_lastname = $row['lastname'];                     
 
 
                     }
@@ -605,21 +606,37 @@ footer{
                             
                   }
 
-      //handling submission of member contribution            
+      
+                  //handling submission of member contribution            
       if(isset($_POST['mem_cont'])){
 
+            //get beneficiary details using beneficiary id(ben_id)
+            $ben_id   =  $_POST['alumni_list'];  
+            $ben_type = "";
+             $sql = "SELECT * FROM beneficiary WHERE id= '$ben_id' ";
+             $res = mysqli_query($conn,$sql);         
 
-            $cont_firstname =  test_input($_POST['c_fname']);
-            $cont_lastname  =  test_input($_POST['c_lname']);
-            $ben_firstname  =  test_input($_POST['b_fname']);            
-            $ben_lastname   =  test_input($_POST['b_lname']);
-            $amount_con     =  test_input($_POST['c_amount']);
-            $ben_type       =  test_input($_POST['ben_type']);
+            if(mysqli_num_rows($res) > 0)
+            {
+                      
+              if($row = mysqli_fetch_assoc($res))
+              {
+                $ben_type  = $row['ben_type'];
+              
+              } 
+            }
+                        
+            
+            $contr_id = $_POST['c_id'];              
+            $amount_con     =  test_input($_POST['c_amount']);            
             $creator        =  $_SESSION['admin_name'];
+            
+
 
             //perform database operations 
-            $sql = "INSERT INTO contribution(cont_fname,cont_lname,ben_fname,ben_lname,ben_type,amount,creator) VALUES('$cont_firstname','$cont_lastname','$ben_firstname','$ben_lastname','$ben_type','$amount_con','$creator')";
-          if(mysqli_query($conn,$sql)){
+            $sql = "INSERT INTO contribution(contrb_id,benf_id,benf_type,amount,creator) VALUES('$contr_id','$ben_id','$ben_type','$amount_con','$creator')";
+          if(mysqli_query($conn,$sql))
+          {
 
                 
               echo "<script>alert(\"Member contribution successfully!\");
@@ -637,10 +654,7 @@ footer{
   
 
 
-?>
-
-           
-        
+?>        
 
          <p style="color:#fff;text-align:center;font-size:29px;background:black;">Contribution form </p>
         
@@ -648,25 +662,37 @@ footer{
                <button style="float:right; margin-bottom:20px;border-radius: 90%" onclick="hide_cont_form()" ><i class="far fa-times-circle fa-3x" style="color:black;"></i></button><br>
                    
                    <lable style="font-size:24px;" >Beneficiary's Details</lable><br>
-                   <lable for="b_fname">Firstname</lable>
-                   <input type="text" class="form-control" name="b_fname" placeholder="Beneficiary firstname" required><br>
-                   <lable for="b_lname">Lastname</lable>
-                   <input type="text" class="form-control" name="b_lname" placeholder="Beneficiary lastname" required><br>
-                   <lable for="type">Contribution type</lable>
-                            <select id="ben_type" name="ben_type" style="width:40%;padding:8px;border-radius:5px;">
-                                <option value="Wedding">Wedding</option>
-                                <option value="Outdooring">Outdooring</option>
-                                <option value="Birthday">Birthday</option>
-                                <option value="Funeral">Funeral</option>                         
-                                <option value="Others">Others</option>
-                             </select><br><br>
+                   <select name="alumni_list" id="alumni_list" style="width:50%;padding:8px;border-radius:5px;">
+                      <!-- display all alumni in list -->
+                      <option value="">--select alumni--</option>
+                      <?php 
+                          $sql = "SELECT beneficiary.id,beneficiary.ben_id,beneficiary.ben_type,alumni.firstname,alumni.lastname 
+                          FROM beneficiary INNER JOIN alumni ON beneficiary.ben_id = alumni.id";
+                          $res = mysqli_query($conn,$sql);
+                          if(mysqli_num_rows($res) > 0)
+                          {
+                            while($row = mysqli_fetch_assoc($res))
+                            {
+                              echo "<option value=".$row['id'].">".$row['firstname']." ".$row['lastname']." (".$row['ben_type'] .")</option>"; 
+                            }                         
+
+                          }
+
+
+                      ?>
+
+                   
+                   </select>
+                   <br>
+                   <br>
                    <lable style="font-size:24px;" >Contributor's Details</lable><br>
                    <lable for="c_fname">Firstname</lable>
                    <input type="text" class="form-control" name="c_fname"  value="<?php echo $cont_firstname; ?>" ><br>
                    <lable for="c_lname">Lastname</lable>
                    <input type="text" class="form-control" name="c_lname" value="<?php echo $cont_lastname; ?>" ><br>
                    <lable for="c_amount">Amount Contributed</lable>
-                   <input type="text" class="form-control" name="c_amount" placeholder="Enter amount" required><br>                   
+                   <input type="text" class="form-control" name="c_amount" placeholder="Enter amount" required><br> 
+                   <input type="hidden" class="form-control" name="c_id" value="<?php echo $cont_id; ?>" ><br>                   
                                
                    <input type="submit" class="btn btn-primary form-control" name="mem_cont" value="CONTRIBUTE" style="background:#000;color:#fff;padding:5px;font-size:25px;
                    border:none;border-radius:20px;width:180px;margin-left:14px;">
