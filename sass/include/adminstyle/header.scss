@@ -1,0 +1,80 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.navbar{
+   
+    width: 100%;
+
+}
+.sidebar{
+    position: fixed;
+    width: 250px;
+    background-color: $admin-panel;
+    height: 100%;
+    
+    padding-top: 30px;
+    transition: 0.5s;
+    transition-property: margin-left;
+  
+    a{
+        text-decoration: none;
+        display: block;
+        line-height:30px;
+        box-sizing: border-box;
+        color: $color-kosa-primary;
+        font-size: 25px;
+        font-family: $font-rubik;
+        padding: 10px;
+        width: 100%;
+        transition: 0.5s;
+        transition-property: background;
+    }
+    a:hover{
+        background: yellow;
+    }
+    center p{
+        font-size: 20px;
+        font-family: $font-raleway;
+    }
+    i{
+        padding-right: 10px;
+    }
+}
+#sidebar_btn{
+    cursor: pointer;
+    
+}
+#profile_pic{
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    margin-bottom: 10px;
+  
+}
+#check{
+    display: none;
+    &:checked ~ main {
+    .sidebar{
+        margin-left: -190px;
+        a span{
+            display: none;
+        }
+        a{
+            font-size: 20px;
+            margin-left: 190px;
+           width: 24%;
+        }
+    }
+    .content{
+        margin-left: 80px;
+    }
+  
+}
+}
+.content{
+    margin-left: 280px;
+    padding: 10px 5px;
+    transition: 0.5s;
+    transition-property: margin-left;
+}

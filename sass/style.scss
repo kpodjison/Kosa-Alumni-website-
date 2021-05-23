@@ -1,0 +1,14 @@
+/*google fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Baloo+Thambi+2&family=Raleway&family=Rubik&display=swap');
+
+@import './include/variables';
+@import'./include/colors';
+@import './include/typography.scss';
+
+/*admin style imports*/
+@import './include/adminstyle/header';
+
+/*main page style*/
+@import'./include/mainstyle';
+
+@import'./include/footer';

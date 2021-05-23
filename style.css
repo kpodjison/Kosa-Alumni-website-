@@ -1,0 +1,156 @@
+/*google fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Baloo+Thambi+2&family=Raleway&family=Rubik&display=swap");
+/*font variable*/
+/*color variables*/
+.color-primary {
+  color: #ffffff;
+}
+
+.color-secondary {
+  color: #00b8e6;
+}
+
+.bg-trasp {
+  background: #0004;
+}
+
+.bg-kosa-blue {
+  background: #00b8e6;
+}
+
+/*typograph template */
+.font-rale {
+  font-family: "Raleway", cursive;
+}
+
+.font-rubik {
+  font-family: "Rubik", cursive;
+}
+
+.font-baloo {
+  font-family: "Baloo Thambi 2", cursive;
+}
+
+.font-acme {
+  font-family: "Acme", cursive;
+}
+
+/*admin style imports*/
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar {
+  width: 100%;
+}
+
+.sidebar {
+  position: fixed;
+  width: 250px;
+  background-color: #9d0004;
+  height: 100%;
+  padding-top: 30px;
+  transition: 0.5s;
+  transition-property: margin-left;
+}
+.sidebar a {
+  text-decoration: none;
+  display: block;
+  line-height: 30px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-size: 25px;
+  font-family: "Rubik", cursive;
+  padding: 10px;
+  width: 100%;
+  transition: 0.5s;
+  transition-property: background;
+}
+.sidebar a:hover {
+  background: yellow;
+}
+.sidebar center p {
+  font-size: 20px;
+  font-family: "Raleway", cursive;
+}
+.sidebar i {
+  padding-right: 10px;
+}
+
+#sidebar_btn {
+  cursor: pointer;
+}
+
+#profile_pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  margin-bottom: 10px;
+}
+
+#check {
+  display: none;
+}
+#check:checked ~ main .sidebar {
+  margin-left: -190px;
+}
+#check:checked ~ main .sidebar a span {
+  display: none;
+}
+#check:checked ~ main .sidebar a {
+  font-size: 20px;
+  margin-left: 190px;
+  width: 24%;
+}
+#check:checked ~ main .content {
+  margin-left: 80px;
+}
+
+.content {
+  margin-left: 280px;
+  padding: 10px 5px;
+  transition: 0.5s;
+  transition-property: margin-left;
+}
+
+/*main page style*/
+:root {
+  --shadow:0 1px 5px rgba(104, 104,104, 0.8 );
+}
+
+main nav {
+  background: #00b8e6;
+}
+main nav a {
+  color: #000;
+}
+
+body {
+  background-color: yellow;
+}
+
+.knav a:hover {
+  background: #000;
+  color: #00b8e6;
+}
+
+.search_btn {
+  background: #000;
+  color: #00b8e6;
+}
+
+.search_btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+footer {
+  background: #000;
+  color: #00b8e6;
+  font-size: 28px;
+  height: 40px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */
