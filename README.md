@@ -13,5 +13,6 @@ System administrators have an interractive multipurpose dashboard where they can
 * Create beneficiaries
 ## Major improvements 
 * Used template inheritance in webpages (php files) to ensure code modurality and maintainability
+* PhP OOP
 * Used Sass (css extension) to enable inline imports, nested rules, variables and many more.
 
