@@ -14,4 +14,4 @@ System administrators have an interractive multipurpose dashboard where they can
 ## Major improvements 
 * Used template inheritance in webpages (php files) to ensure code modurality and maintainability
 * Used Sass (css extension) to enable inline imports, nested rules, variables and many more.
-* 
+
