@@ -9,16 +9,11 @@
    <!-- ----------------------------start of index template--------------------------  -->
    <?php
 
-     include('../admin/templates/_index.php');
+     include('../admin/templates/_admins.php');
 
     ?>
 <!-- --------------------------end of template ----------------------------------  -->
 
-
-
-
-
-   
    <!-- ----------------------------start of footer.php--------------------------  -->
 <?php
 

@@ -9,7 +9,7 @@
    <!-- ----------------------------start of index template--------------------------  -->
    <?php
 
-     include('../admin/templates/_index.php');
+     include('../admin/templates/_category.php');
 
     ?>
 <!-- --------------------------end of template ----------------------------------  -->

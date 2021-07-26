@@ -1,11 +1,11 @@
-<div class="wrapper">
+<div class="wrapper" >
 
 
-<div class="greetings"><p>WELCOME TO KOSA 2008( The Disciples ) LOGIN PAGE</p></div>
+<div class="greetings"><p>WELCOME TO KOSA 2008( The Disciples ) REGISTRATION PAGE</p></div>
       
           <!-- start of registration form -->                          
-                      <div class="container innercontainer" >
-                                <p>Register For An Alumni Account</p>
+                      <div class="container reg_innercontainer py-2" >
+                                <p style="background:none">Register For An Alumni Account</p>
                                 <div class="container formdiv" >
 
 
@@ -32,7 +32,7 @@
                                     </form>
                                     <br>
 
-                                    <span>Already have an account?<a href="alumnilogin.php" >Login Now!</a></span> 
+                                    <span class="text-white px-1">Already have an account?<a href="alumnilogin.php" class="px-1">Login Now!</a></span> 
                                 
                                 </div>       
     

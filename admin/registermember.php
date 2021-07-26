@@ -6,13 +6,13 @@
 ?>
 <!-- ------------------------end of header.php-------------------------------  -->
 
-<!-- -----------------------start of beneficiary template ----------------------------  -->
+<!-- -----------------------start of register members template ----------------------------  -->
 <?php
 
-  include('../admin/templates/_beneficiary.php');
+  include('../admin/templates/_registermember.php');
 
 ?>
-<!-- ------------------------end of beneficiary template -------------------------------  -->
+<!-- ------------------------end of register members template -------------------------------  -->
    
    <!-- ---------------------------start of footer.php------------------------  -->
 <?php

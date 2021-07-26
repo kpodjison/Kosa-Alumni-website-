@@ -8,7 +8,7 @@
 
 
 <?php
-    include('alumni/_index.php');
+    include('alumni/_fullpost.php');
 ?>
 
 

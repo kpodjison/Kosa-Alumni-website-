@@ -6,15 +6,11 @@
 ?>
 <!-- -----------------------end of header.php  ------------------------------->
 
-   <!-- -----------------------start of alumnilogin template  --------------------------->
- <?php
+    <?php
 
-     include('templates/_alumnilogin.php');
+     include('templates/_notice.php');
 
-?>
-<!-- -----------------------------------end of alumnilogin template  -------------------->
- 
-   
+?>   
    <!-- -----------------------start of footer.php  --------------------------->
 <?php
 

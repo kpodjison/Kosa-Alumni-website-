@@ -3,16 +3,19 @@
 
 <!--  ------------------------------------end of main  ---------------------------------------------->
 
-                   <!-- start of navbar  -->
-
-<!-- start of footer section  -->
-
-<section>
 
 
-               <!-- start of footer  -->
-               <footer> &copy;KOSA <?php echo date("Y");?></footer>
-               <!-- end of footer  -->
+ <!-- start of footer  -->
+   <footer> 
+      <div class="container-fluid bg-dark text-white">
+         <div class="row">
+            <div class="col-lg-12">
+               <p class="text-center">&copy;KOSA <?php echo date("Y");?></p>
+            </div>
+         </div>
+      </div>
+   </footer>
+ <!-- end of footer  -->
 
 
 
@@ -25,7 +28,7 @@
 <!-- owl carousel cdn  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-</section>
+
 <!-- end  of footer section  -->
 </body>
 </html>
