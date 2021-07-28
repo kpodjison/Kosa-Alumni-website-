@@ -1,6 +1,5 @@
 <?php
-
-    // all posts 
+// all posts 
     $allPosts = $post->getAllPost("");
 ?>
 

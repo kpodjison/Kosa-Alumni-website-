@@ -76,10 +76,24 @@
             }
         }
 
+        public function confirmLogin()
+        {
+            if(isset($_SESSION['UserId']))
+            {
+                return TRUE;
+            }
+            else{
+                $_SESSION['ErrorMsg'] = "Login Required!!";
+                echo '<script>window.location="adminlogin.php";</script>';
+                // header('Location:adminlogin.php');
+            }
+        }
+
         public function adminLogin()
         {
             if($_SERVER['REQUEST_METHOD'] === 'POST')
-            {
+            { 
+                
                 if(isset($_POST['admin_login']))
                 {
                     $user_name = $this->db->mysqli->real_escape_string($_POST['Username']);
@@ -95,10 +109,16 @@
                         $_SESSION['AdminName']  = $item['a_name'];
                         $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
                         if(isset($_SESSION['UrlTracker'])){
-                            header('Location:'.$_SESSION['UrlTracker']);
+                            // header('Location:'.$_SESSION['UrlTracker']);
+                            echo '<script>window.location="{$_SESSION[\'UrlTracker\']}";</script>';
+                         
                         }else
                         {
-                           header('Location:../admin/index.php'); 
+                        //    header('Location:../admin/index.php'); 
+                        echo '<script>window.location="../admin/index.php";</script>';
+                           
+                           
+                           
                         }                       
                         
                     }
@@ -110,17 +130,6 @@
             }
         }
 
-        public function confirmLogin()
-        {
-            if(isset($_SESSION['UserId']))
-            {
-                return TRUE;
-            }
-            else{
-                $_SESSION['ErrorMsg'] = "Login Required!!";
-                header('Location:adminlogin.php');
-            }
-        }
 
          //get all admins function
          public function getAllAdmins()
@@ -316,10 +325,5 @@
 
         
     }
-
-
-
-
-
 
 ?>

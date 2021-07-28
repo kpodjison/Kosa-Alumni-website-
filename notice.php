@@ -1,4 +1,3 @@
-<!-- ----------------------start of header.php  ------------------------------>
 <?php
 
   include('header.php');
@@ -6,7 +5,7 @@
 ?>
 <!-- -----------------------end of header.php  ------------------------------->
 
-    <?php
+<?php
 
      include('alumni/_notice.php');
 

@@ -1,4 +1,3 @@
-<!-- ----------------------start of header.php  ------------------------------>
 <?php
 
   include('header.php');
@@ -7,7 +6,7 @@
 <!-- -----------------------end of header.php  ------------------------------->
 
    <!-- -----------------------start of about-us template  --------------------------->
- <?php
+<?php
 
      include('alumni/_about-us.php');
 

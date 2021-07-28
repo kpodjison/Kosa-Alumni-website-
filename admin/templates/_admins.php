@@ -1,6 +1,6 @@
 <?php
-    // $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
-    // $admin->confirmLogin();
+    $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+    $admin->confirmLogin();
 ?>
 <?php
     
@@ -102,38 +102,41 @@
 
           <!-- //start of category table  -->
          
-            <div class="col-lg-12">
-              <h3>Existing Amins</h3>
+          <div class="col-lg-12"><h3>Existing Amins</h3></div>
+              
+            
+            <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-responsive table-hover">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>No.</th>
+                        <th>Date&Time</th>
+                        <th>User Name</th>
+                        <th>Admin Name</th>
+                        <th>Added By</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                        $counter = 0;
+                        foreach($allAdmins as $admin):
+                          $counter++;
+                      ?>
+                      <tr>
+                        <td><?php echo $counter; ?></td>
+                        <td><?php echo htmlentities($admin['date_time']) ?></td>
+                        <td><?php echo htmlentities($admin['username']) ?></td>
+                        <td><?php echo htmlentities($admin['a_name']) ?></td>
+                        <td><?php echo htmlentities($admin['added_by']) ?></td>
+                        <td class="text-center"><a href="admins.php?admid=<?php echo htmlentities($admin['id']); ?>" class="btn btn-danger">Delete</a></td>
+                      
+                      </tr>
+                      <?php  endforeach; ?>
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-striped table-bordered table-responsive table-hover">
-              <thead class="table-dark">
-                <tr>
-                  <th>No.</th>
-                  <th>Date&Time</th>
-                  <th>User Name</th>
-                  <th>Admin Name</th>
-                  <th>Added By</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                  $counter = 0;
-                  foreach($allAdmins as $admin):
-                    $counter++;
-                ?>
-                <tr>
-                  <td><?php echo $counter; ?></td>
-                  <td><?php echo htmlentities($admin['date_time']) ?></td>
-                  <td><?php echo htmlentities($admin['username']) ?></td>
-                  <td><?php echo htmlentities($admin['a_name']) ?></td>
-                  <td><?php echo htmlentities($admin['added_by']) ?></td>
-                  <td class="text-center"><a href="admins.php?admid=<?php echo htmlentities($admin['id']); ?>" class="btn btn-danger">Delete</a></td>
-                 
-                </tr>
-                <?php  endforeach; ?>
-              </tbody>
-            </table>
+            
          
   
           <!-- //end of category table  -->

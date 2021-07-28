@@ -1,10 +1,6 @@
 <?php
-    // $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
-    // $admin->confirmLogin();
-
-   echo $_SESSION['UserId'];
-   echo $_SESSION['UserName'];
-   echo $_SESSION['AdminName'];
+    $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+    $admin->confirmLogin();
 ?>
 <?php  
 

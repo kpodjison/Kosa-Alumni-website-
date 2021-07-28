@@ -1,7 +1,4 @@
-<?php 
-
-require('../functions.php');
- ?>
+<?php require('../functions.php'); ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +13,7 @@ require('../functions.php');
       <!-- font awesome  -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
               <!-- local stylesheet-->
-              <link href=".../style.css" rel="stylesheet">
+              <link href="../style.css" rel="stylesheet">
           
       <!-- OwlCarousel2  -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -36,7 +33,7 @@ require('../functions.php');
             <div class="collapse navbar-collapse" id="kosa-navbar-collapse">
                   <ul class="navbar-nav me-auto mb-2">
                     <li class="nav-item">
-                      <a href="" class="nav-link">My Profile</a>
+                      <a href="profile.php" class="nav-link">My Profile</a>
                     </li>
                     <li class="nav-item">
                       <a href="index.php" class="nav-link">Dashboard</a>

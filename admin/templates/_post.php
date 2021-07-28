@@ -1,4 +1,6 @@
 <?php
+ $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+ $admin->confirmLogin();
     $allPosts = $post->getAllPost("");
 ?>
 

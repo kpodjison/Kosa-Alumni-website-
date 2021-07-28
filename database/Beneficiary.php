@@ -37,7 +37,4 @@ class Beneficiary implements Operations
 
 
 }
-
-
-
 ?>

@@ -65,7 +65,7 @@ require('functions.php');
                     </ul>
                   </li> -->
                 </ul>
-                <a href="adminlogin.php" class="nav-link text-dark ms-0">Admin Login</a>
+                <a href="./admin/adminlogin.php" class="nav-link text-dark ms-0">Admin Login</a>
                 <form class="d-flex">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn search_btn" type="submit">Search</button>

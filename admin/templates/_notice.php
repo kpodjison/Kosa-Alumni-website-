@@ -1,5 +1,6 @@
  <?php
-
+ $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+ $admin->confirmLogin();
  //add notice category 
   if(isset($_POST['notice_cat']))
   {

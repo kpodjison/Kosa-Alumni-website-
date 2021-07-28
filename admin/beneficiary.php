@@ -1,4 +1,3 @@
-<!-- -----------------------start of header.php----------------------------  -->
 <?php
 
   include('../admin/header.php');

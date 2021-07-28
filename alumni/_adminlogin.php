@@ -1,10 +1,4 @@
 <?php
-// if(isset($_SESSION['UserId'])){
-    //     header('Location:../admin/index.php');
-    // }
-    if(isset($_SESSION['UserId'])){
-        header('Location:../admin/index.php');
-    }
     if(isset($_POST['admin_login']))
     {
 

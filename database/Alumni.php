@@ -2,7 +2,7 @@
 
 class Alumni implements Operations{
 
-public $db = null;
+    public $db = null;
 
         public function __construct(DBController $db)
         {
@@ -49,6 +49,5 @@ public $db = null;
 
 
 }
-
 
 ?>

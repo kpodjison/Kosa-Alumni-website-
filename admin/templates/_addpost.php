@@ -1,6 +1,6 @@
 <?php
-    // $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
-    // $admin->confirmLogin();
+    $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+    $admin->confirmLogin();
 ?>
 <?php
 
