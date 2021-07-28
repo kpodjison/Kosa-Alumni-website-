@@ -98,7 +98,7 @@
                             header('Location:'.$_SESSION['UrlTracker']);
                         }else
                         {
-                           header('Location:../admin/dashboard.php'); 
+                           header('Location:../admin/index.php'); 
                         }                       
                         
                     }
@@ -118,7 +118,7 @@
             }
             else{
                 $_SESSION['ErrorMsg'] = "Login Required!!";
-                header('Location:../admin/login.php');
+                header('Location:adminlogin.php');
             }
         }
 
@@ -192,6 +192,126 @@
                 }
             }              
         }
+
+        // function to add alumni 
+        public function addAlumni(){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if(isset($_POST['add_memb'])){
+                    $fname = $this->db->mysqli->real_escape_string($_POST['fname']);
+                    $lname = $this->db->mysqli->real_escape_string($_POST['lname']);
+                    $gender = $this->db->mysqli->real_escape_string($_POST['gender']);
+                    $phnum = $this->db->mysqli->real_escape_string($_POST['phnum']);
+                    $email = $this->db->mysqli->real_escape_string($_POST['email']);
+                    $occupation = $this->db->mysqli->real_escape_string($_POST['occupation']);
+                    $bio = $this->db->mysqli->real_escape_string($_POST['alumni_bio']);
+                    $creator = "jeevista";
+
+                    $sql = "INSERT INTO alumni(firstname,lastname,gender,phone_num,email,creator,occupation,bio) VALUES 
+                            ('$fname','$lname','$gender','$phnum','$email','$creator','$occupation','$bio')";
+
+                            if($this->db->conn->query($sql) === TRUE){
+                                $_SESSION['SuccessMsg'] = "Alumni {$fname} Created Successfully!";
+                            }
+                            else {
+                                $_SESSION['ErrorMsg'] = "Failed to Create Alumni!!";
+                            }
+                }
+            }
+        }
+
+         //get all alumni function
+         public function getAllAlumni()
+         {                     
+         
+                  $sql = "SELECT * FROM alumni";
+                  $results = $this->db->conn->query($sql);
+                  $resultsArray = array();
+            
+                 while($item = mysqli_fetch_assoc($results))
+                 {
+                     $resultsArray[] = $item;
+                 }            
+            
+                 //final results returned
+             return $resultsArray;
+         }
+
+          // function to add notice category
+        public function noticeCategory(){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if(isset($_POST['notice_cat'])){
+                    $title = $this->db->mysqli->real_escape_string($_POST['title']);
+                    $creator = "jeevista";
+
+                    $sql = "INSERT INTO notice_category(title,author) VALUES ('$title','$creator')";
+
+                            if($this->db->conn->query($sql) === TRUE){
+                                $_SESSION['SuccessMsg'] = "Notice Category Created Successfully!";
+                            }
+                            else {
+                                $_SESSION['ErrorMsg'] = "Failed to Create Notice Category!!";
+                            }
+                }
+            }
+        }
+
+         //get all notice categories
+         public function getnoticeCategory()
+         {                     
+         
+                  $sql = "SELECT * FROM notice_category";
+                  $results = $this->db->conn->query($sql);
+                  $resultsArray = array();
+            
+                 while($item = mysqli_fetch_assoc($results))
+                 {
+                     $resultsArray[] = $item;
+                 }            
+            
+                 //final results returned
+             return $resultsArray;
+         }
+
+           // function to add notice
+        public function addNotice(){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if(isset($_POST['add_not'])){
+                    $desc = $this->db->mysqli->real_escape_string($_POST['noticeDesc']);
+                    $category = $this->db->mysqli->real_escape_string($_POST['notice_type']);
+                    $dueDate = $this->db->mysqli->real_escape_string($_POST['dueDate']);
+                    $creator = "jeevista";
+
+                    $sql = "INSERT INTO notice (notice_type,descrip,creator,due_date) VALUES ('$category','$desc','$creator','$dueDate')";
+
+                            if($this->db->conn->query($sql) === TRUE){
+                                $_SESSION['SuccessMsg'] = "Notice Created Successfully!";
+                            }
+                            else {
+                                $_SESSION['ErrorMsg'] = "Failed to Create Notice!!";
+                            }
+                }
+            }
+        }
+
+         //get all notice 
+         public function getNotice()
+         {                     
+         
+                  $sql = "SELECT * FROM notice";
+                  $results = $this->db->conn->query($sql);
+                  $resultsArray = array();
+            
+                 while($item = mysqli_fetch_assoc($results))
+                 {
+                     $resultsArray[] = $item;
+                 }            
+            
+                 //final results returned
+             return $resultsArray;
+         }
+
+
+        
  
 
         

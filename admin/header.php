@@ -1,9 +1,7 @@
 <?php 
 
 require('../functions.php');
-
-?>
-
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,7 +16,7 @@ require('../functions.php');
       <!-- font awesome  -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
               <!-- local stylesheet-->
-              <!-- <link href="../style.css" rel="stylesheet"> -->
+              <link href=".../style.css" rel="stylesheet">
           
       <!-- OwlCarousel2  -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -47,7 +45,7 @@ require('../functions.php');
                       <a href="category.php" class="nav-link">Category</a>
                     </li>
                     <li class="nav-item">
-                      <a href="" class="nav-link">Post</a>
+                      <a href="post.php" class="nav-link">Post</a>
                     </li>
                     <li class="nav-item">
                       <a href="admins.php" class="nav-link">Manage Admins</a>
@@ -62,7 +60,7 @@ require('../functions.php');
                       <a href="../index.php" target="_blank" class="nav-link">KOSA LIVE</a>
                     </li>
                     <li class="nav-item">
-                      <a href="" class="nav-link">Logout</a>
+                      <a href="logout.php" class="nav-link">Logout</a>
                     </li>
                   </ul>
                   <form class="d-flex">

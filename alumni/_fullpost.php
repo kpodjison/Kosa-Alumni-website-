@@ -1,18 +1,63 @@
+<?php
+    $post_id = "";
+    if(isset($_GET['search_btn']))
+    {
+        $allPosts = $post->getAllPost(htmlentities($_GET['Search']));
+    }
+    if(isset($_GET['id']))
+    {
+        $searchQueryParam = $_GET['id'];
+        $singlePost = $post->getSinglePost( $searchQueryParam);
+        if(empty($singlePost))
+        {
+            $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
+             redirect_to('index.php'); 
+        }
+    }    
+    if(!isset($_GET['id']) || empty($_GET['id']))
+    {
+        $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
+        redirect_to('index.php'); 
+    }
+
+    //handling comments
+    if(isset($_POST['add_comment']))
+    {      
+        if(empty($_POST['commenter_name']) ||  empty($_POST['commenter_email']) || empty($_POST['commenter_comments']))
+        {
+            $_SESSION['ErrorMsg'] = "All fields must be filled!!";
+            redirect_to('fullpost.php?id='.$_POST['post_id']);
+        }
+        else if(strlen($_POST['commenter_comments']) > 500)
+        {
+            $_SESSION['ErrorMsg'] = "Comment length should be less than 500 characters!!";
+            redirect_to('fullpost.php?id='.$_POST['post_id']);
+        }        
+        else{
+            $post->addComment();
+        }        
+    }    
+
+?>
+
+
 <div class="container my-4" style="min-height:560px;">
     <div class="row">
-        <div class="col-lg-9">
-        
+        <div class="col-lg-9">          
             <h2><span><i class="fas fa-blog me-1 text-primary"></i></span> Kosa Blog</h2>
+            <?php
+                foreach($singlePost as $single):
+            ?>
             <div class="card p-3 mb-4">
-                <img src="assets/uploads/bg-38.jpg" alt="post-img" class="card-img img-fluid mb-1" style="max-height:450px;">
+                <img src="assets/uploads/<?php echo htmlentities($single['post_img']); ?>" alt="post-img" class="card-img img-fluid mb-1" style="max-height:450px;">
                 <card-body>
-                    <h3>Raya the last dragon</h3>
-                    <small class="lead">Written By: jee on date</small>
+                    <h3><?php echo htmlentities($single['title']); ?></h3>
+                    <small class="lead">Written By: <?php echo htmlentities($single['author']); ?> on <?php echo htmlentities($single['date_time']); ?></small>
                     <hr>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quae aspernatur tempore adipisci soluta culpa!</p>
-                    
+                    <p class="card-text"><?php echo htmlentities($single['post_desc']); ?></p>                    
                 </card-body>
             </div>
+            <?php endforeach;?>
             <!-- start of comments  -->
             <div class="media d-flex flex-row mb-2 p-1 border bg-secondary">
                 <img src="assets/admins/user2.png" alt="commenter-image" class="img-fluid me-2 align-self-start col-md-2" width="64px" height="64px">

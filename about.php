@@ -9,7 +9,7 @@
    <!-- -----------------------start of about-us template  --------------------------->
  <?php
 
-     include('templates/_about-us.php');
+     include('alumni/_about-us.php');
 
 ?>
 <!-- -----------------------------------end of about-us template  -------------------->

@@ -1,28 +1,26 @@
+<?php
+
+    // all posts 
+    $allPosts = $post->getAllPost("");
+?>
+
 <div class="container my-4" style="min-height:560px;">
     <div class="row">
         <div class="col-lg-9">
         
             <h2><span><i class="fas fa-blog me-1 text-primary"></i></span> Kosa Blog</h2>
+            <?php foreach($allPosts as $post): ?>
             <div class="card p-3 mb-4">
-                <img src="assets/uploads/Colorful-creativity-of-the-hand_1920x1080.jpg" alt="post-img" class="card-img img-fluid" style="max-height:450px;">
+                <img src="assets/uploads/<?php echo htmlentities($post['post_img']); ?>" alt="post-img" class="card-img img-fluid" style="max-height:450px;">
                 <card-body>
-                    <h3>Point and solve the problem</h3>
-                    <small class="lead">Written By: jee on date</small>
+                    <h3><?php echo htmlentities($post['title']); ?></h3>
+                    <small class="lead">Written By: <?php echo htmlentities($post['author']); ?> on <?php echo htmlentities($post['date_time']); ?></small>
                     <hr>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quae aspernatur tempore adipisci soluta culpa!</p>
-                    <a href="fullpost.php" class="btn btn-primary float-end"> <span>Read More >></span> </a>
+                    <p class="card-text"><?php echo htmlentities($post['post_desc']); ?></p>
+                    <a href="fullpost.php?id=<?php echo htmlentities($post['id']); ?>" class="btn btn-primary float-end"> <span>Read More >></span> </a>
                 </card-body>
             </div>
-            <div class="card p-3 mb-4">
-                <img src="assets/uploads/bg-38.jpg" alt="post-img" class="card-img img-fluid" style="max-height:450px;">
-                <card-body>
-                    <h3>Raya the last dragon</h3>
-                    <small class="lead">Written By: jee on date</small>
-                    <hr>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quae aspernatur tempore adipisci soluta culpa!</p>
-                    <a href="fullpost.php" class="btn btn-primary float-end"> <span>Read More >></span> </a>
-                </card-body>
-            </div>
+            <?php endforeach; ?>
 
         </div>
         <!-- start of left side bar  -->

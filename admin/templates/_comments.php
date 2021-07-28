@@ -1,4 +1,9 @@
 <?php
+    // $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+    // $admin->confirmLogin();
+?>
+
+<?php
 
  //add category 
   if(isset($_POST['add_cat']))

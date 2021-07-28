@@ -1,17 +1,11 @@
 <?php
-session_start();
+    require('../functions.php');
 
-//delete all session variables
-session_unset();
-//destroy session
-session_destroy();
-
-session_cache_expire();
-
-//redirect to kosa homepage
-header('location: ../index.php');
-exit;
-
+    $_SESSION['UserId']  = null;
+    $_SESSION['UserName']  = null;
+    $_SESSION['AdminName']  = null;
+    session_destroy();
+    // redirect_to('../adminlogin.php');
 
 
 ?>

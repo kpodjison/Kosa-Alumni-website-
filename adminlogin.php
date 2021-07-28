@@ -11,7 +11,7 @@
    <!-- -----------------------start of adminlogin template  --------------------------->
  <?php
 
-     include('templates/_adminlogin.php');
+     include('alumni/_adminlogin.php');
 
 ?>
 <!-- -----------------------------------end of adminlogin template  -------------------->

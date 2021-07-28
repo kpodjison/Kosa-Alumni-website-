@@ -8,7 +8,7 @@
 
     <?php
 
-     include('templates/_notice.php');
+     include('alumni/_notice.php');
 
 ?>   
    <!-- -----------------------start of footer.php  --------------------------->

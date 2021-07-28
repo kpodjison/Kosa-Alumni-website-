@@ -1,222 +1,160 @@
-<?php 
+<?php
+    
+    // Handling creation of alumni
+    if(isset($_POST['add_memb'])){
+        
+        if(!empty($_POST['fname']))
+        {
+            if(strlen($_POST['fname']) < 3)
+            {
+                $_SESSION['ErrorMsg'] = "Alumni firstname cannot be short!!"; 
+            }            
+            else if(strlen($_POST['fname']) > 15)
+            {
+                $_SESSION['ErrorMsg'] = "Alumni firstname should be less than 15 characters!!"; 
 
-    // session_start();
+            }
+            else{
+                $admin->addAlumni();                           
+            }                   
+           
+        }
+        else if(empty($_POST['fname'])){
+            $_SESSION['ErrorMsg'] = "Please add a firstname!!";         
+           
+        }       
+    }
 
-    // if(empty($_SESSION['admin_id'])){
-      
-    // 	  header('location: ..\adminlogin.php');
-      
-    // }
+    //delete admin
+    if(isset($_GET['admid']))
+    {
+        $admin->DeleteAdmin();
+    }
 
-    //connection
-    require_once('..\connection.php');
+    //get all alumni
+    $allAlumni = $admin->getAllAlumni();    
+    //print_r($allAlumni);
 
 ?>
- <!-- start of beneficiary content  -->
- <div class="content-ben">
-                  <!-- start of add beneficiafy -->
-                <div class="container" id="add_notice_content " >
-                          <div class="container note_adm text-white">
-                                  <h2><b>NOTE:</b></h2>
-                                  <p>Please search <b>exact firstname</b> or <b>lastname</b> of members to add to beneficiaries</p>
-                                  <p>Please visit <a href="members.php">MEMBERS</a> if you are in doubt 
-                                  of beneficiary's firstname and lastname.
-                                </p>
-
-                          </div>
-                            <div class="container"> 
-                              <div class="col">
-                                <div class="row-sm-4 dis_3">
-                                  <h3 style="text-align:center">MEMBERS</h3>                              
-                                </div>
-                                <div class="row-sm-8">
-
-                                  <!-- beneficiary table -->
-
-                                  <div class="table-responsive">
-                                                    <table class="table text-white">                                          
-                                                            <thead>
-                                                                <tr>                                                            
-                                                                    <th> FirstName</th>
-                                                                    <th>LastName</th>
-                                                                    <th>Benefit Type</th>
-                                                                    <th>Add to Beneficiary</th>
-                                                                                                        
-                                                                </tr>                                    
-                                                            </thead>
-
-                                                            <tbody>
-                                                          
-                                          <!-- fetching beneficiaries from db -->
-
-
-                                          
-                            <!-- send notification to db -->                  
-                        <?php
-
-                                                            
-                                        //function to validate user input
-                                        function test_input($data)
-                                        {
-                                          $data = trim($data);
-                                          $data = stripslashes($data);
-                                          $data = htmlspecialchars($data);
-                                          
-                                          return $data;
-
-                                        }
-
-                                        //vars to hold user name and creator
-                                        $name = $creator ="";
-
-                                        if(isset($_POST['alumni_search']))
-                                        {
-                                        $name = test_input($_POST["alumni_name"]);                     
-                                        $creator = $_SESSION['admin_name'];
-
-                                        if(!empty($name))
-                                        {
-                                            $sql = "SELECT * FROM alumni WHERE firstname='$name' or lastname= '$name' ";
-                                            $results = mysqli_query($conn,$sql);
-                                          if(mysqli_num_rows($results) > 0){
-                                            while($row = mysqli_fetch_assoc($results))
-                                                  {
-                                                      echo "<tr>";
-                                                      echo "<td>".$row['firstname']."</td>";
-                                                      echo "<td>".$row['lastname']."</td>";
-                                                      echo '<td><form method="GET" class="rg" action="beneficiary.php">                                              
-                                            <select id="bft_type" name="bft_type" >                                    
-                                                <option value="Wedding">Wedding</option>
-                                                <option value="Outdooring">Outdooring</option>
-                                                <option value="Birthday">Birthday</option>
-                                                <option value="Funeral">Funeral</option>                         
-                                                <option value="Others">Others</option>
-                                              </select></td>'.                                                    
-                                    '<td><input  type="hidden" name="bft_id" value="'. $row["id"].' ">                                    
-                                    <input type="submit"  name="add_beft" value="ADD" onclick="return confirm(\'Are you sure you want to add '. $row["firstname"].'  \');"></form></td>';
-
-                                                      echo "<tr>";
-                                                  }
-
-
-                                            
-                                          }
-                                          else
-                                          {
-                                            echo '<script>alert("No alumni with this name!!");</script>';  
-                                                                  
-                                          }
-
-                                        }else
-                                        {
-                                        echo '<script>alert("Please enter a name.");</script>';  
-                                        }
-
-
-                                        }
-
-                        ?>
-                                                            
-                                                                                            
-                                                            </tbody>                                     
-                                                    
-                                                    </table>                      
-                                          
-                                                </div>
-                                  
-
-                                </div>
-
-                    </div>                  
-                  
-                 </div> 
-              <!-- end of add beneficiary -->       
-
-                <!-- start of display benficiaries -->
-              <div class="container" style="margin-top:30px;"> 
-
-
-
-                          <div class="col">
-                            <div class="row-sm-4 dis_2">                        
-                            
-                              <h3 style="text-align:center">BENEFICIARIES</h3>  
-                            
-                            </div>
-                            <div class="row-sm-4 ">                        
-                            
-                              
-                              <p>Below are the list of all KOSA members who are beneficiaries.You can perform operations 
-                                such as deletion of beneficiary information.
-                              </p> 
-                            
-                            
-                            </div>
-
-                            <div class="row-sm-8">
-
-                              <!-- beneficiary table -->
-
-                              <div class="table-responsive">
-                                                <table class="table text-white">                                          
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Firstname</th>
-                                                                <th>Lastname</th>
-                                                                <th>Type</th>
-                                                                <th>Amount</th>
-                                                                <th>Date and Time</th>
-                                                                <th>Creator</th>
-                                                                <th>Delete</th>
-                                                                                                      
-                                                            </tr>                                    
-                                                        </thead>
-
-                                                        <tbody class="text-white">
-                                                      
-                                      <!-- fetching notifications from db -->
-                                                      <?php
-                                                          foreach($all_beneficiary as $ben):
-                                                            $id= $ben['ben_id'];
-                                                            $single_alumni = $alumni->getSingleData($id);
-                                                            print_r($id);
-                                                            foreach($single_alumni as $item):
-                                                      ?>      
-                                                          
-
-
-                                                                    <tr>
-                                                                       <td> <?php echo $item['firstname'] ?></td>
-                                                                       <td> <?php echo $item['lastname'] ?></td>
-                                                                       <td> <?php echo $ben['ben_type'] ?></td>
-                                                                       <td> <?php echo $ben['amount'] ?></td>
-                                                                       <td> <?php echo $ben['time_date'] ?></td>
-                                                                       <td> <?php echo $ben['creator'] ?></td>
-                                                                       <td> <button class="btn btn-danger">DELETE</button></td>
-                                                                     </tr>
-
-                                                       <?php 
-                                                       endforeach;
-                                                       endforeach; ?>
-                                                                                                  
-                                                        </tbody>                                     
-                                                
-                                                </table>                      
-                                      
-                                            </div>
-                              
-
-                            </div>
-
-                </div>
-                        
-              </div>
-                <!-- end of display benficiaries -->
-             
-
-
+<div class="container-fluid px-0">  
+  <div class="container-fluid bg-dark mb-2 py-2">
+       <div class="row">
+         <div class="col-md-12">
+            <h1 class="text-white"><span><i class="fas fa-users text-primary"></i></span> Manage Alumni</h1>
          </div>
-              <!-- end of beneficiary content    -->
+       </div>                    
+  </div> 
+  <div class="container mb-2">
+         
+    <div class="row">
+      <div class="offset-lg-1 col-lg-10">
+         <?php
+            echo SuccessMsg();
+            echo ErrorMsg()
+         ?>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="mb-4">
+            <div class="card">
+              <div class="card-header bg-secondary text-white">
+                <h3>Add New Alumni</h3>
+              </div>
+              <div class="card-body bg-dark text-white">
+                <div class="form-group mb-2">
+                  <label for="fname" class="mb-1">First Name</label>
+                  <input type="text" id="fname" name="fname" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="lname" class="mb-1">Last Name</label>
+                  <input type="text" id="lname" name="lname" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="gender" class="mb-1">Gender</label>
+                  <select name="gender" id="gender" class="form-control">
+                    <option value="" >--select gender--</option>
+                    <option value="male" >Male</option>
+                    <option value="female" >Female</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label for="phnum" class="mb-1">Phone Number</label>
+                  <input type="tel" id="phnum" name="phnum" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="email" class="mb-1">Email</label>
+                  <input type="email" id="email" name="email" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="occupation" class="mb-1">Occupation</label>
+                  <input type="text" id="occupation" name="occupation" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="alumni_bio" class="mb-1">Bio</label>
+                  <input type="text" id="alumni_bio" name="alumni_bio" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6  text-center text-white ">
+                      <a href="index.php" class="btn btn-warning py-3" style="width:100%;height:60px;"> <span> <i class="fas fa-arrow-left"></i></span> Back To Dashboard</a>
+                    </div>
+                    <div class="col-lg-6 text-center text-white ">
+                      <button class="btn btn-success"  type="submit" name="add_memb" style="width:100%;height:60px;"> <span> <i class="fas fa-check"></i></span> Add Alumni</button>
+                    </div>
+                </div> 
+
+              </div>
+            </div>
+        </form>
+
+          <!-- //start of member table  -->
+         
+            <div class="col-lg-12">
+              <h3>Existing Alumni</h3>
+            </div>
+            <div class="table-responsive">
+               <table class="table table-striped table-bordered table-responsive table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>No.</th>
+                  <th>Date&Time</th>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>PhoneNum</th>
+                  <th>Added By</th>
+                  <th>Action</th>
+                  <th>Preview</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  $counter = 0;
+                  foreach($allAlumni as $alumnis):
+                    $counter++;
+                ?>
+                <tr>
+                  <td><?php echo $counter; ?></td>
+                  <td><?php echo htmlentities($alumnis['date_time']) ?></td>
+                  <td><?php echo htmlentities($alumnis['firstname'])." ".htmlentities($alumnis['lastname']) ?></td>
+                  <td><?php echo htmlentities($alumnis['email'] ) ?></td>
+                  <td><?php echo htmlentities($alumnis['phone_num'] ) ?></td>
+                  <td><?php echo htmlentities($alumnis['creator'] ) ?></td>
+                  <td class="text-center">
+                  <div class="btn-group" role="group">                    
+                      <a href="contribute.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-success me-2">Contribute</a>
+                      <a href="members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-warning me-2">Edit</a>
+                      <a href="members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-danger ms-1">Delete</a>
+                    </div>
+                  </td>
+                  <td class="text-center"><a href=members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-primary">Details</a></td>
+                 
+                </tr>
+                <?php  endforeach; ?>
+              </tbody>
+            </table>
+            </div>  
+  
+          <!-- //end of members table  -->
+      </div>
+    </div>
+  </div>
+
 
  
-  

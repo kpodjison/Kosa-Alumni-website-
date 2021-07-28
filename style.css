@@ -22,6 +22,18 @@
   background: #9d0004;
 }
 
+.bg-kosa-1 {
+  background: #e89a09;
+}
+
+.bg-kosa-2 {
+  background: #e4fa23;
+}
+
+.bg-kosa-3 {
+  background: #09edde;
+}
+
 /*typograph template */
 .font-rale {
   font-family: "Raleway", cursive;
