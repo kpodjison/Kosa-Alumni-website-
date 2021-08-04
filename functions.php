@@ -20,11 +20,10 @@ $all_alumni = $alumni->getData();
 //post object created
 $post = new Post($db);
 
-
-function redirect_to($page)
-{
-    header("Location:".$page);
-    exit;
-}
+// function redirect_to($page)
+// {
+//     header("Location:".$page);
+//     exit;
+// }
 
 ?>

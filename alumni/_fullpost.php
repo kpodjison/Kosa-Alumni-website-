@@ -1,10 +1,11 @@
 <?php
     $post_id = "";
+   
     if(isset($_GET['search_btn']))
     {
         $allPosts = $post->getAllPost(htmlentities($_GET['Search']));
     }
-    if(isset($_GET['id']))
+    else if(isset($_GET['id']))
     {
         $searchQueryParam = $_GET['id'];
         $singlePost = $post->getSinglePost( $searchQueryParam);
@@ -14,29 +15,37 @@
              redirect_to('index.php'); 
         }
     }    
-    if(!isset($_GET['id']) || empty($_GET['id']))
+    else if(!isset($_GET['id']) || empty($_GET['id']))
     {
         $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
         redirect_to('index.php'); 
     }
 
-    //handling comments
-    if(isset($_POST['add_comment']))
-    {      
-        if(empty($_POST['commenter_name']) ||  empty($_POST['commenter_email']) || empty($_POST['commenter_comments']))
-        {
-            $_SESSION['ErrorMsg'] = "All fields must be filled!!";
-            redirect_to('fullpost.php?id='.$_POST['post_id']);
-        }
-        else if(strlen($_POST['commenter_comments']) > 500)
-        {
-            $_SESSION['ErrorMsg'] = "Comment length should be less than 500 characters!!";
-            redirect_to('fullpost.php?id='.$_POST['post_id']);
-        }        
-        else{
-            $post->addComment();
-        }        
-    }    
+
+?>
+
+<?php
+
+
+ //handling comments
+ if(isset($_POST['add_comment']))
+ {      
+     if(empty($_POST['commenter_name']) ||  empty($_POST['commenter_email']) || empty($_POST['commenter_comments']))
+     {
+         // $post_id = $_GET['id'];
+         $_SESSION['ErrorMsg'] = "All fields must be filled!!";  
+
+     }
+     else if(strlen($_POST['commenter_comments']) > 500)
+     {
+         $_SESSION['ErrorMsg'] = "Comment length should be less than 500 characters!!";
+    
+     }        
+     else{
+         $post->addComment();
+     }        
+ }   
+
 
 ?>
 
@@ -45,6 +54,11 @@
     <div class="row">
         <div class="col-lg-9">          
             <h2><span><i class="fas fa-blog me-1 text-primary"></i></span> Kosa Blog</h2>
+            <?php
+                    echo SuccessMsg();
+                    echo ErrorMsg();
+
+                ?>
             <?php
                 foreach($singlePost as $single):
             ?>
@@ -79,11 +93,14 @@
                         <div class="input-group mb-2">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                             <input type="text" name="commenter_name" id="commenter_name" class="form-control">
+                            <input type="hidden" name="post_id" value="<?php echo$_GET['id'] ?>" id="post_id" class="form-control">
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mb-2">
                             <span class="input-group-text"><i class="fas fa-at"></i></span>
                             <input type="email" name="commenter_email" id="commenter_email" class="form-control">
-                        </div>                            
+                        </div>
+                        <textarea name="commenter_comments" id="" cols="30" rows="8" class="form-control mb-2"></textarea>
+                        <input type="submit" value="Comment" class="btn btn-primary float-end" name="add_comment">                            
                     </form>
                 </div>
             </div>

@@ -83,6 +83,7 @@
                                   <div class="col-lg-6 mb-2">
                                        <label for="dueDate" class="mb-1">Due Date</label>
                                           <input type="date" name="dueDate" id="dueDate" class="form-control" value="2021/1/1" min="2021/1/1" max="2031/1/1">
+                                          <small class="lead text-danger float-end" style="font-size:13px;">This can be empty if notice has no due date</small>
                                   </div>
                             </div>
                             
@@ -128,7 +129,14 @@
                   <td><?php echo htmlentities($notice['descrip']) ?></td>
                   <td>
                     <span class="badge btn-warning text-dark">
-                      <?php echo htmlentities($notice['due_date']) ?>
+                      <?php 
+                        if(empty($notice['due_date']))
+                        {
+                          echo 'N/A';
+                        }else{
+                          echo htmlentities($notice['due_date'] ?? 'N/A');
+                        }
+                      ?>
                   </span>                    
                   </td>
                   <td><?php echo htmlentities($notice['creator']) ?></td>
