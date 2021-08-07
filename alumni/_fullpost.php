@@ -1,5 +1,6 @@
 <?php
     $post_id = "";
+    $searchQueryParam = "";
    
     if(isset($_GET['search_btn']))
     {
@@ -8,6 +9,9 @@
     else if(isset($_GET['id']))
     {
         $searchQueryParam = $_GET['id'];
+             //all comments corresponding 
+        $allPostComments = $post->getPostComments($searchQueryParam);
+        print_r($allPostComments);
         $singlePost = $post->getSinglePost( $searchQueryParam);
         if(empty($singlePost))
         {
@@ -20,6 +24,8 @@
         $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
         redirect_to('index.php'); 
     }
+
+
 
 
 ?>
@@ -44,7 +50,8 @@
      else{
          $post->addComment();
      }        
- }   
+ }
+
 
 
 ?>
@@ -73,14 +80,16 @@
             </div>
             <?php endforeach;?>
             <!-- start of comments  -->
-            <div class="media d-flex flex-row mb-2 p-1 border bg-secondary">
-                <img src="assets/admins/user2.png" alt="commenter-image" class="img-fluid me-2 align-self-start col-md-2" width="64px" height="64px">
-                <div class="media-body col-md-10 ">
-                    <h6 class="lead mb-0" >Jeevista</h6> 
-                    <small>Datehere</small>
-                    <p>wow this is great</p>
+            <?php  foreach($allPostComments as $comment): ?>
+                <div class="media d-flex flex-row mb-2 p-1 border bg-secondary">
+                    <img src="assets/admins/user2.png" alt="commenter-image" class="img-fluid me-2 align-self-start col-md-2" width="64px" height="64px">
+                    <div class="media-body col-md-10 ">
+                        <h6 class="lead mb-0" ><?php echo htmlentities($comment['commenter_name']); ?></h6> 
+                        <small><?php echo substr(htmlentities($comment['date_time']),0,10); ?></small>
+                        <p><?php echo htmlentities($comment['comment']); ?></p>
+                    </div>
                 </div>
-            </div>
+            <?php   endforeach;?>
             <!-- end of comments  -->
         
             <hr>
@@ -134,12 +143,11 @@
                     <h3>Post Categories</h3>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="card-text d-block">Wedding</a>
-                    <a href="#" class="card-text d-block">Birthday</a>
-                    <a href="#" class="card-text d-block">Funeral</a>
-                    <a href="#" class="card-text d-block">Oudooring</a>
-                    <a href="#" class="card-text d-block">Health</a>
-                    <a href="#" class="card-text d-block">Internet Security</a>
+                    <?php foreach($allCategories as $categories): 
+                        
+                        echo '<a href="#" class="card-text d-block">'.ucfirst($categories["title"]).'</a>'; ?>
+
+                     <?php  endforeach; ?>
                 </div>
             </card>
 

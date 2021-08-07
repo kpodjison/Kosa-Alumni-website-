@@ -285,12 +285,13 @@
         public function addNotice(){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 if(isset($_POST['add_not'])){
+                    $heading = $this->db->mysqli->real_escape_string($_POST['heading']);
                     $desc = $this->db->mysqli->real_escape_string($_POST['noticeDesc']);
                     $category = $this->db->mysqli->real_escape_string($_POST['notice_type']);
                     $dueDate = $this->db->mysqli->real_escape_string($_POST['dueDate']);
                     $creator = "jeevista";
 
-                    $sql = "INSERT INTO notice (notice_type,descrip,creator,due_date) VALUES ('$category','$desc','$creator','$dueDate')";
+                    $sql = "INSERT INTO notice (notice_type,heading,descrip,creator,due_date) VALUES ('$category','$heading','$desc','$creator','$dueDate')";
 
                             if($this->db->conn->query($sql) === TRUE){
                                 $_SESSION['SuccessMsg'] = "Notice Created Successfully!";

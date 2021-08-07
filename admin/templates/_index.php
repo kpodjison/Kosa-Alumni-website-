@@ -6,7 +6,15 @@
 
     // all notices
     $allNotice = $admin->getNotice();
+    $totalNotice = count($admin->getNotice());
+    // print_r($allNotice);
     $allPosts = $post->getLatestPost(5);
+    $totalPost = $post->getPostTotal();
+    $totalAlumni =count($admin->getAllAlumni()); 
+    // echo $totalAlumni;
+
+    
+   
 ?>
 
 <div class="container-fluid px-0">  
@@ -45,21 +53,21 @@
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Posts</h3>
-            <p><span><i class="fas fa-readme"></i> </span> 5</p>
+            <p><span><i class="fas fa-readme"></i> </span> <?php echo $totalPost??0;?></p>
           </div>
           
         </div>
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Notice</h3>
-            <p><span><i class="fas fa-readme"></i> </span> 5</p>
+            <p><span><i class="fas fa-readme"></i> </span><?php echo $totalNotice??0;?></p>
           </div>
           
         </div>
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Members</h3>
-            <p><span><i class="fas fa-readme"></i> </span> 5</p>
+            <p><span><i class="fas fa-readme"></i> </span> <?php echo $totalAlumni??0;?></p>
           </div>
           
         </div>
@@ -109,7 +117,15 @@
                       <td><?php echo htmlentities($notice['descrip']) ?></td>
                       <td>
                           <span class="badge btn-warning text-dark">
-                            <?php echo htmlentities($notice['due_date']) ?>
+                            
+                                  <?php 
+                                if(empty($notice['due_date']))
+                                {
+                                  echo 'N/A';
+                                }else{
+                                  echo htmlentities($notice['due_date'] ?? 'N/A');
+                                }
+                              ?>
                           </span>  
                       <td><?php echo htmlentities($notice['creator']) ?></td>
                       <td><a href="" class="btn btn-primary" target="_blank">Preview</a></td>
@@ -151,7 +167,7 @@
                                     <td><?php  echo htmlentities($post['author'])?></td>                                    
                                     <td>comment</td>                    
                                     <td>
-                                    <a href="../index.php"=<?php echo htmlentities($post['id']) ?>" class="btn btn-primary me-2" target="_blank">Preview</a>
+                                    <a href="../fullpost.php?id=<?php echo htmlentities($post['id']) ?>" class="btn btn-primary me-2" target="_blank">Preview</a>
                                     </td>
                                     
                                   </tr>

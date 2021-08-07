@@ -1,4 +1,9 @@
 <?php
+    $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
+    $admin->confirmLogin();
+?>
+
+<?php
    /* ---start of unapproved comment operations--- */
     //approve comment 
         if(isset($_GET['cid']))

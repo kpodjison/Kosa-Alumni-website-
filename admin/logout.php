@@ -4,7 +4,8 @@
     $_SESSION['UserName']  = null;
     $_SESSION['AdminName']  = null;
     session_destroy();
-     redirect_to('adminlogin.php');
+    header('location:../admin/adminlogin.php');
+    //  redirect_to('adminlogin.php');
 
 
 ?>

@@ -1,6 +1,8 @@
 <?php
 // all posts 
     $allPosts = $post->getAllPost("");
+
+ 
 ?>
 
 <div class="container my-4" style="min-height:560px;">
@@ -50,12 +52,11 @@
                     <h3>Post Categories</h3>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="card-text d-block">Wedding</a>
-                    <a href="#" class="card-text d-block">Birthday</a>
-                    <a href="#" class="card-text d-block">Funeral</a>
-                    <a href="#" class="card-text d-block">Oudooring</a>
-                    <a href="#" class="card-text d-block">Health</a>
-                    <a href="#" class="card-text d-block">Internet Security</a>
+                    <?php foreach($allCategories as $categories): 
+                        
+                        echo '<a href="#" class="card-text d-block">'.ucfirst($categories["title"]).'</a>'; ?>
+
+                     <?php  endforeach; ?>
                 </div>
             </card>
 

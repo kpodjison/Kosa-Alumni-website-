@@ -26,4 +26,7 @@ $post = new Post($db);
 //     exit;
 // }
 
+// fetch all categories
+$allCategories = $post->getAllCategories();
+
 ?>

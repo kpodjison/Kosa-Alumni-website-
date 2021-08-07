@@ -15,12 +15,18 @@
  //add notice 
   if(isset($_POST['add_not']))
   {
-    if(empty($_POST['noticeDesc'])){
+    if(empty($_POST['heading'])){
+      $_SESSION['ErrorMsg'] = "Sorry Please Give A Descriptive Heading!!";
+    }
+     else if(empty($_POST['noticeDesc'])){
       $_SESSION['ErrorMsg'] = "Sorry Notice Description Cannot Be Empty!!";
     }
     else if(empty($_POST['notice_type'])){
       $_SESSION['ErrorMsg'] = "Sorry Select Notice Type!!";
-    }
+    }    
+    else if(strlen($_POST['heading']) > 30){
+      $_SESSION['ErrorMsg'] = "Sorry Heading Cannot Be More Than 30 Characters!!";
+    }    
     else{
       $admin->addNotice();
     }
@@ -65,6 +71,11 @@
                       </div>
                       <div class="card-body bg-dark text-white">
                             <div class="form-group mb-2">
+                                <label for="heading" class="mb-1">Heading</label>
+                                <input type="text" id="heading" name="heading" class="form-control">
+                                <small class="lead text-danger float-end" style="font-size:13px;">Please give a short descriptive heading (eg. abc's wedding or outdooring)</small>
+                            </div>
+                            <div class="form-group mb-2">
                               <label for="noticeDesc" class="mb-1">Description</label>
                               <textarea class="form-control" name="noticeDesc" id="noticeDesc" cols="30" rows="5"></textarea>
                             </div>
@@ -85,8 +96,8 @@
                                           <input type="date" name="dueDate" id="dueDate" class="form-control" value="2021/1/1" min="2021/1/1" max="2031/1/1">
                                           <small class="lead text-danger float-end" style="font-size:13px;">This can be empty if notice has no due date</small>
                                   </div>
-                            </div>
-                            
+
+                            </div>  
                             <div class="row">
                                 <div class="col-lg-6  text-center text-white mb-2">
                                   <a href="index.php" class="btn btn-warning py-3" style="width:100%;height:60px;"> <span> <i class="fas fa-arrow-left"></i></span> Back To Dashboard</a>
