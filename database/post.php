@@ -75,8 +75,10 @@
                         
                         //move file into uploads folder
                         move_uploaded_file($_FILES['image']['tmp_name'], $ImgTargetDir);                        
-                        $_SESSION['EditSuccessMsg'] = "Post {$post_id}: Updated Successfully!";
-                        header("Location:post.php");
+                        $_SESSION['SuccessMsg'] = "Post {$post_id}: Updated Successfully!";
+                        echo ' <script>window.location="../admin/post.php";</script>';
+                        // header('location:..\admin\post.php');
+                        
                           
 
                     }
@@ -103,8 +105,11 @@
                     {
                         // delete image corresponding to this addPost 
                         unlink($Target_Path_To_Delete_Img);
-                        $_SESSION['DeleteSuccessMsg'] = "Post: {$post_id} Deleted Successfully!";
-                        header("Location:post.php");
+                        $_SESSION['SuccessMsg'] = "Post: {$post_id} Deleted Successfully!";
+                        // header("Location:post.php");
+                        echo ' <script>window.location="../admin/post.php";</script>';
+                       
+                        
                     }
 
                 }

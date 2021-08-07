@@ -25,6 +25,11 @@
   <div class="container ">
     <div class="row">
       <div class="offset-lg-1 col-lg-10 " style="min-height:410px;">
+      <?php  
+          echo SuccessMsg();
+          echo ErrorMsg();
+          
+      ?>
           <div class="table-responsive my-3">
               <table class="table table-striped table-bordered table-hover">
                   <thead class="table-dark">
@@ -57,12 +62,12 @@
                         <td>comment</td>
                         <td>
                           <div class="btn-group">
-                              <a href="addpost.php?pdid=<?php echo htmlentities($post['id']) ?>" class="btn btn-success me-2"> Edit</a>
-                              <a href="addpost.php?pdid=<?php echo htmlentities($post['id']) ?>" class="btn btn-danger me-2"> Edit</a>
+                              <a href="editpost.php?id=<?php echo htmlentities($post['id']) ?>" class="btn btn-success me-2"> Edit</a>
+                              <a href="deletepost.php?id=<?php echo htmlentities($post['id']) ?>" class="btn btn-danger me-2" > Delete</a>
                           </div>
                         </td>
                         <td>
-                        <a href="../index.php"=<?php echo htmlentities($post['id']) ?>" class="btn btn-primary me-2">Preview</a>
+                        <a href="../fullpost.php?id=<?php echo htmlentities($post['id']) ?>" class="btn btn-primary me-2" target="_blank">Preview</a>
                         </td>
                         
                       </tr>

@@ -11,7 +11,7 @@
         $searchQueryParam = $_GET['id'];
              //all comments corresponding 
         $allPostComments = $post->getPostComments($searchQueryParam);
-        print_r($allPostComments);
+        // print_r($allPostComments);
         $singlePost = $post->getSinglePost( $searchQueryParam);
         if(empty($singlePost))
         {
