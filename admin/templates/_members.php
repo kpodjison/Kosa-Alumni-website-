@@ -106,9 +106,9 @@
           <!-- //start of member table  -->
          
             <div class="col-lg-12">
-              <h3>Existing Alumni</h3>
+              <h3 id="alumni_table">Existing Alumni</h3>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" id="alumni_table">
                <table class="table table-striped table-bordered table-responsive table-hover">
               <thead class="table-dark">
                 <tr>
@@ -138,6 +138,7 @@
                   <td><?php echo htmlentities($alumnis['creator'] ) ?></td>
                   <td class="text-center">
                   <div class="btn-group" role="group">                    
+                      <a href="beneficiary.php?benid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-secondary me-2">Benefit</a>
                       <a href="contribute.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-success me-2">Contribute</a>
                       <a href="members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-warning me-2">Edit</a>
                       <a href="members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-danger ms-1">Delete</a>

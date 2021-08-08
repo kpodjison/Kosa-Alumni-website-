@@ -62,4 +62,20 @@ session_start();
             }
 
     }
+      // success message for directing admin to members page
+    function BenSuccessMsg()
+    {
+            if(isset($_SESSION['BenSuccessMsg']))
+            {
+                $status = '<div class="alert alert-success">'
+                            .htmlentities($_SESSION["BenSuccessMsg"]).
+                            '<a href="members.php" >Here</a>'.
+                            '</div>';
+
+                            //make this session null after using it
+                            $_SESSION["BenSuccessMsg"]  = null;
+                            return $status;
+            }
+
+    }
 ?>

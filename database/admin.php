@@ -1,6 +1,7 @@
 <?php
 
-    class Admin{
+    class Admin
+    {
         public $db;
 
         public function __construct(DBController $db)
@@ -12,7 +13,8 @@
             $this->db = $db;
         }
 
-        public function addAdmin(){
+        public function addAdmin()
+        {
             
             if($_SERVER['REQUEST_METHOD'] === 'POST')
             {
@@ -43,7 +45,8 @@
         }
 
         //function to edit admin profile
-        public function EditAdminProfile(){
+        public function EditAdminProfile()
+        {
             
             if($_SERVER['REQUEST_METHOD'] === 'POST')
             {
@@ -180,7 +183,8 @@
 
          //delete admin function 
            //delete comment 
-           public function DeleteAdmin(){
+           public function DeleteAdmin()
+           {
             if($_SERVER['REQUEST_METHOD'] === 'GET')
             {
                 if(isset($_GET['admid']))
@@ -245,8 +249,40 @@
              return $resultsArray;
          }
 
+          //get single alumni function
+          public function getSingleAlumni($id)
+          {  
+              $resultsArray = array();                   
+             if(is_numeric($id))
+             {
+                  $sql = "SELECT * FROM alumni WHERE id='$id' ";
+                   $results = $this->db->conn->query($sql);                 
+             
+                  while($item = mysqli_fetch_assoc($results))
+                  {
+                      $resultsArray[] = $item;
+                  } 
+             }
+             else
+             { 
+                 $sql = "SELECT * FROM admins WHERE username='$id' ";
+                 $results = $this->db->conn->query($sql);                 
+           
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $resultsArray[] = $item;
+                } 
+ 
+             }
+                             
+             
+                  //final results returned
+              return $resultsArray;
+          }
+
           // function to add notice category
-        public function noticeCategory(){
+        public function noticeCategory()
+        {
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 if(isset($_POST['notice_cat'])){
                     $title = $this->db->mysqli->real_escape_string($_POST['title']);
@@ -264,50 +300,87 @@
             }
         }
 
-         //get all notice categories
-         public function getnoticeCategory()
-         {                     
-         
-                  $sql = "SELECT * FROM notice_category";
-                  $results = $this->db->conn->query($sql);
-                  $resultsArray = array();
-            
-                 while($item = mysqli_fetch_assoc($results))
-                 {
-                     $resultsArray[] = $item;
-                 }            
-            
-                 //final results returned
-             return $resultsArray;
-         }
-
-           // function to add notice
-        public function addNotice(){
+             //get all notice categories
+             public function getnoticeCategory()
+             {                     
+             
+                      $sql = "SELECT * FROM notice_category";
+                      $results = $this->db->conn->query($sql);
+                      $resultsArray = array();
+                
+                     while($item = mysqli_fetch_assoc($results))
+                     {
+                         $resultsArray[] = $item;
+                     }            
+                
+                     //final results returned
+                 return $resultsArray;
+             }
+    
+               // function to add notice
+            public function addNotice(){
+                if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    if(isset($_POST['add_not'])){
+                        $heading = $this->db->mysqli->real_escape_string($_POST['heading']);
+                        $desc = $this->db->mysqli->real_escape_string($_POST['noticeDesc']);
+                        $category = $this->db->mysqli->real_escape_string($_POST['notice_type']);
+                        $dueDate = $this->db->mysqli->real_escape_string($_POST['dueDate']);
+                        $creator = "jeevista";
+    
+                        $sql = "INSERT INTO notice (notice_type,heading,descrip,creator,due_date) VALUES ('$category','$heading','$desc','$creator','$dueDate')";
+    
+                                if($this->db->conn->query($sql) === TRUE){
+                                    $_SESSION['SuccessMsg'] = "Notice Created Successfully!";
+                                }
+                                else {
+                                    $_SESSION['ErrorMsg'] = "Failed to Create Notice!!";
+                                }
+                    }
+                }
+            }
+    
+             //get all notice 
+             public function getNotice()
+             {                     
+             
+                      $sql = "SELECT * FROM notice";
+                      $results = $this->db->conn->query($sql);
+                      $resultsArray = array();
+                
+                     while($item = mysqli_fetch_assoc($results))
+                     {
+                         $resultsArray[] = $item;
+                     }            
+                
+                     //final results returned
+                 return $resultsArray;
+             }
+    
+          // function to add notice category
+        public function addBenefitCategory()
+        {
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                if(isset($_POST['add_not'])){
-                    $heading = $this->db->mysqli->real_escape_string($_POST['heading']);
-                    $desc = $this->db->mysqli->real_escape_string($_POST['noticeDesc']);
-                    $category = $this->db->mysqli->real_escape_string($_POST['notice_type']);
-                    $dueDate = $this->db->mysqli->real_escape_string($_POST['dueDate']);
+                if(isset($_POST['benefit_cat'])){
+                    $title = $this->db->mysqli->real_escape_string($_POST['title']);
                     $creator = "jeevista";
 
-                    $sql = "INSERT INTO notice (notice_type,heading,descrip,creator,due_date) VALUES ('$category','$heading','$desc','$creator','$dueDate')";
+                    $sql = "INSERT INTO benefit_category(title,author) VALUES ('$title','$creator')";
 
                             if($this->db->conn->query($sql) === TRUE){
-                                $_SESSION['SuccessMsg'] = "Notice Created Successfully!";
+                                $_SESSION['SuccessMsg'] = "Notice Category Created Successfully!";
                             }
                             else {
-                                $_SESSION['ErrorMsg'] = "Failed to Create Notice!!";
+                                $_SESSION['ErrorMsg'] = "Failed to Create Notice Category!!";
                             }
                 }
             }
         }
 
-         //get all notice 
-         public function getNotice()
+         //get all benefit categories
+         public function getBenefitCategory()
          {                     
          
-                  $sql = "SELECT * FROM notice";
+                  $sql = "SELECT * FROM benefit_category";
                   $results = $this->db->conn->query($sql);
                   $resultsArray = array();
             
@@ -319,12 +392,56 @@
                  //final results returned
              return $resultsArray;
          }
+                        // function to add beneficiary
+         public function addBeneficiary()
+         {
+                            if($_SERVER['REQUEST_METHOD'] === 'POST')
+                            {
+                                if(isset($_POST['add_benef']))
+                                {
+                                    $ben_id = $this->db->mysqli->real_escape_string($_POST['id']);
+                                    $ben_type = $this->db->mysqli->real_escape_string($_POST['benef_type']);
+                                    $creator = "jeevista";
+                
+                                    $sql = "INSERT INTO beneficiary (ben_id,ben_type,creator) VALUES ('$ben_id','$ben_type','$creator')";
+                
+                                            if($this->db->conn->query($sql) === TRUE){
+                                                $_SESSION['SuccessMsg'] = "Beneficiary Created Successfully!";
+                                            }
+                                            else {
+                                                $_SESSION['ErrorMsg'] = "Failed to Create Beneficiary!!";
+                                            }
+                                }
+                            }
+        }
 
+        //get all beneficiaries
+        public function getBeneficiary()
+        {                     
+        
+                 $sql = "SELECT * FROM beneficiary";
+                 $results = $this->db->conn->query($sql);
+                 $resultsArray = array();
+           
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $resultsArray[] = $item;
+                }            
+           
+                //final results returned
+            return $resultsArray;
+        }
+                
+    
 
         
  
 
         
-    }
+        }
+      
+    
+
+        
 
 ?>
