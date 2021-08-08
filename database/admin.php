@@ -110,7 +110,7 @@
                         $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
                         if(isset($_SESSION['UrlTracker'])){
                             // header('Location:'.$_SESSION['UrlTracker']);
-                            echo '<script>window.location="{$_SESSION[\'UrlTracker\']}";</script>';
+                            echo '<script>window.location="'.$_SESSION['UrlTracker'].'";</script>';
                          
                         }else
                         {
