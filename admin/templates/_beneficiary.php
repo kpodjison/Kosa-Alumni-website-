@@ -52,7 +52,7 @@
 
     // fetch all categories
   $allBenefitCategories = $admin->getBenefitCategory();
-  $allBenefeciaries = $admin->getBeneficiary();
+  $allBenefeciaries = $admin->getBeneficiary("");
 ?>
 <div class="container-fluid px-0">  
   <div class="container-fluid bg-dark mb-2 py-2">

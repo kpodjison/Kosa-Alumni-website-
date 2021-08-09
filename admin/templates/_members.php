@@ -139,7 +139,7 @@
                   <td class="text-center">
                   <div class="btn-group" role="group">                    
                       <a href="beneficiary.php?benid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-secondary me-2">Benefit</a>
-                      <a href="contribute.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-success me-2">Contribute</a>
+                      <a href="contribution.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-success me-2">Contribute</a>
                       <a href="members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-warning me-2">Edit</a>
                       <a href="members.php?memid=<?php echo htmlentities($alumnis['id']); ?>" class="btn btn-danger ms-1">Delete</a>
                     </div>

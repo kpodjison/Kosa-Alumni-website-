@@ -416,10 +416,20 @@
         }
 
         //get all beneficiaries
-        public function getBeneficiary()
+        public function getBeneficiary($flag)
         {                     
-        
-                 $sql = "SELECT * FROM beneficiary";
+                    if($flag == "p"){
+                        $sql = "SELECT * FROM beneficiary WHERE status='in-progress'";
+                    }
+                    else if($flag == "d")
+                    {
+                        $sql = "SELECT * FROM beneficiary WHERE status='done'";
+
+                    }
+                    else if($flag == ""){
+                        $sql = "SELECT * FROM beneficiary"; 
+                    }
+                 
                  $results = $this->db->conn->query($sql);
                  $resultsArray = array();
            
@@ -431,16 +441,62 @@
                 //final results returned
             return $resultsArray;
         }
-                
-    
 
-        
- 
+                        // function to add beneficiary
+         public function addContribution()
+          {
+             if($_SERVER['REQUEST_METHOD'] === 'POST')
+                {
+                    if(isset($_POST['add_cont']))
+                    {
+                                $contr_id = $this->db->mysqli->real_escape_string($_POST['contr_id']);
+                                $ben_details = $this->db->mysqli->real_escape_string($_POST['benef_details']);
+                                $amount = $this->db->mysqli->real_escape_string($_POST['amount']);
+                                $sql_1 = "SELECT * FROM beneficiary WHERE id='$ben_details' ";
+                                $results = $this->db->conn->query($sql_1);
+                                $ben_id = $ben_type = "";
+                                $resultsArray = array();
+                                while($item = mysqli_fetch_assoc($results) )
+                                {
+                                    $resultsArray = $item;
+                                }
+                                $ben_id = $resultsArray['ben_id'];
+                                $ben_type = $resultsArray['ben_type'];
+                                $creator = "jeevista";
+                                    
+                                $sql = "INSERT INTO contribution (contrb_id,benf_id,benf_type,amount,creator) VALUES ('$contr_id','$ben_id','$ben_type','$amount','$creator')";
+                                // $sql = "INSERT INTO contribution (contrb_id,ben_id,ben_type,amount,creator) VALUES ('contr_id','ben_id','ben_type','10','creator')";
+                                    
+                                    if($this->db->conn->query($sql) === TRUE)
+                                    {
+                                        $_SESSION['SuccessMsg'] = "Contribution Made Successfully!";
+                                        
+                                    }
+                                    else {
+                                            $_SESSION['ErrorMsg'] = "Failed To Make Contribution!!";
+                                        }
+                    }
+                }
+             }
 
-        
+              //get all beneficiaries
+        public function getAllContributors()
+        {                     
+                   
+                $sql = "SELECT * FROM contribution";
+                 
+                 $results = $this->db->conn->query($sql);
+                 $resultsArray = array();
+           
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $resultsArray[] = $item;
+                }            
+           
+                //final results returned
+            return $resultsArray;
         }
-      
-    
+            }
 
         
 

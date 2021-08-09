@@ -1,0 +1,26 @@
+/*about us style*/
+.top_container {
+  background: url(./images/adult.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.top_container .kosa_about {
+  background: #0004;
+  margin-top: 50px;
+}
+
+.top_container h1 {
+  color: #fff;
+  font-family: cambria;
+}
+
+.top_container h1 {
+  font-size: 58px;
+}
+
+#abt {
+  font-size: 24px;
+}
+/*# sourceMappingURL=about-us.css.map */

@@ -41,7 +41,7 @@
                 <a href="notice.php" class="btn btn-primary"><span><i class="fas fa-bullhorn me-1"></i> </span> Add Notice</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="contributions.php" class="btn btn-primary"><span><i class="fas fa-money-bill-alt me-1"></i> </span> Add Contribution</a>
+                <a href="contribution.php" class="btn btn-primary"><span><i class="fas fa-money-bill-alt me-1"></i> </span> Add Contribution</a>
               </div>           
          </div>
 
