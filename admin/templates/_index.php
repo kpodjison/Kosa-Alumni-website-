@@ -13,6 +13,9 @@
     $totalAlumni =count($admin->getAllAlumni()); 
     // echo $totalAlumni;
 
+    $totalContributions = count($admin->getAllContributors());
+    $totalBeneficiaries= count($admin->getBeneficiary(""));
+
     
    
 ?>
@@ -74,14 +77,14 @@
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Beneficiaries</h3>
-            <p><span><i class="fas fa-readme"></i> </span> 5</p>
+            <p><span><i class="fas fa-readme"></i> </span><?php echo $totalBeneficiaries??0;?> </p>
           </div>
           
         </div>
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Contributions</h3>
-            <p><span><i class="fas fa-readme"></i> </span> 5</p>
+            <p><span><i class="fas fa-readme"></i> </span> <?php echo $totalContributions??0;?> </p>
           </div>
           
         </div>

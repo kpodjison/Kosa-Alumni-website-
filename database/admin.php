@@ -443,8 +443,8 @@
         }
 
                         // function to add beneficiary
-         public function addContribution()
-          {
+    public function addContribution()
+        {
              if($_SERVER['REQUEST_METHOD'] === 'POST')
                 {
                     if(isset($_POST['add_cont']))
@@ -477,7 +477,7 @@
                                         }
                     }
                 }
-             }
+        }
 
               //get all beneficiaries
         public function getAllContributors()
@@ -496,7 +496,7 @@
                 //final results returned
             return $resultsArray;
         }
-            }
+  }
 
         
 
