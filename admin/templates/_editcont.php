@@ -19,6 +19,7 @@
         $cont_id =""; 
         $alumni_id = "";
         $ben_alumni_id = "";
+        $cont_details = "";
       if(isset($_GET['eid']))
       {
           //corresponding contributor id from search query parameter
@@ -39,7 +40,21 @@
 
                 //use alumni id to search alumni table for corresponding user info
                 $contributor = $admin->getSingleAlumni($alumni_id);
-                $benefactor = $admin->getSingleAlumni($ben_alumni_id);             
+                
+
+                //get the beneficiary from its corresponding id in contribution table
+                $benf = $admin-> getBeneficiary($ben_alumni_id);
+                //var to hold beneficiary id corresponding to real alumni id
+                $ben_details = "";
+                foreach($benf as $item):
+                  { 
+                    $ben_details = $item['ben_id'];
+
+                  }
+                endforeach;
+
+                //get alumni info based on id
+                $benefactor = $admin->getSingleAlumni($ben_details);             
 
         }
         

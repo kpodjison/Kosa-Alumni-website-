@@ -473,6 +473,10 @@
                         $sql = "SELECT * FROM beneficiary WHERE status='done'";
 
                     }
+                    else if(is_numeric($flag))
+                    {
+                        $sql = "SELECT * FROM beneficiary WHERE id ='$flag' "; 
+                    }
                     else if($flag == ""){
                         $sql = "SELECT * FROM beneficiary"; 
                     }
@@ -620,10 +624,10 @@
                         $sql = "";
     
                         /*if beneficiary type is not changed */
-                        if(empty($ben_details)){
+                        if(empty($ben_details) && !empty($amount)){
                             $sql = "UPDATE contribution SET amount='$amount' WHERE id='$cont_id' ";
                         }
-                        else if(empty($amount))
+                        else if(empty($amount) && !empty($ben_details))
                         {
                             $sql = "UPDATE contribution SET benf_id='$ben_id',benf_type='$ben_type' WHERE id='$cont_id' ";
                         }

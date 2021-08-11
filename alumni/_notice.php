@@ -1,6 +1,6 @@
 <?php
       // all notices
-    $allNotice = $admin->getNotice();
+    $allNotice = $admin->getNotice("");
     $currentDate = date("Y-m-d");
 ?>
     <div class="wrapper " style="min-height:520px">

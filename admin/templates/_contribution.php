@@ -171,36 +171,49 @@
                    $counter = 0;
                   foreach($allContributors as $contributor): 
                   $counter++; ?>
-                <tr>
-                  <td><?php echo $counter; ?></td> 
-                  <?php 
-                    $con_details = $admin-> getSingleAlumni($contributor['contrb_id']);
-                    foreach($con_details as $detail):
-                  ?>
-                  <td>
-                    <?php echo htmlentities($detail['firstname'])." ".htmlentities($detail['lastname']) ?>
-                  </td>
-                  <?php  endforeach; ?>
-                  <?php 
-                    $ben_details = $admin-> getSingleAlumni($contributor['benf_id']);
-                    foreach($ben_details as $detail):
-                  ?>
-                  <td><?php echo htmlentities($detail['firstname'])." ".htmlentities($detail['lastname']) ?></td>
-                  <?php  endforeach; ?>
+                    <tr>
+                      <td><?php echo $counter; ?></td> 
+                      <?php 
+                        $con_details = $admin-> getSingleAlumni($contributor['contrb_id']);
+                        foreach($con_details as $detail):
+                      ?>
+                      <td>
+                        <?php echo htmlentities($detail['firstname'])." ".htmlentities($detail['lastname']) ?>
+                      </td>
+                      <?php  endforeach; ?>
+                      <?php 
+                      //get the beneficiary from its corresponding id in contribution table
+                        $benf = $admin-> getBeneficiary($contributor['benf_id']);
+                        //var to hold beneficiary id corresponding to real alumni id
+                        $ben_details = "";
+                        foreach($benf as $item):
+                          { 
+                            $ben_details = $item['ben_id'];
 
-                  <td><?php echo htmlentities($contributor['benf_type'] ) ?></td>
-                  <td><?php echo htmlentities($contributor['amount'] ) ?></td>
-                  <td><?php echo htmlentities($contributor['date_time'] ) ?></td>
-                  <td>
-                  <div class="btn-group" role="group">                    
-                      <a href="editcont.php?eid=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-warning me-2">Edit</a>
-                      <a href="contribution.php?did=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-danger ms-1" onclick="return confirm('Are you sure you want to delete?'); ">Delete</a>
-                    </div>
-                  </td>
-                  <td><?php echo htmlentities($contributor['creator'] ) ?></td>
-                  
-    
-                </tr>
+                          }
+                        endforeach;
+
+                        //get alumni info based on id
+                        $benf_alumni = $admin-> getSingleAlumni($ben_details);
+
+                        foreach($benf_alumni as $detail):
+                      ?>
+                      <td><?php echo htmlentities($detail['firstname'])." ".htmlentities($detail['lastname']) ?></td>
+                      <?php  endforeach; ?>
+                    
+                      <td><?php echo htmlentities($contributor['benf_type'] ) ?></td>
+                      <td><?php echo htmlentities($contributor['amount'] ) ?></td>
+                      <td><?php echo htmlentities($contributor['date_time'] ) ?></td>
+                      <td>
+                      <div class="btn-group" role="group">                    
+                          <a href="editcont.php?eid=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-warning me-2">Edit</a>
+                          <a href="contribution.php?did=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-danger ms-1" onclick="return confirm('Are you sure you want to delete?'); ">Delete</a>
+                        </div>
+                      </td>
+                      <td><?php echo htmlentities($contributor['creator'] ) ?></td>
+                      
+        
+                    </tr>
                 <?php  endforeach; ?>
               </tbody>
             </table>
