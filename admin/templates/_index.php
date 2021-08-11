@@ -36,12 +36,12 @@
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
                 <a href="members.php" class="btn btn-primary"><span><i class="fas fa-user me-1"></i> </span> Add User</a>
+              </div>              
+              <div class="col-md-2 col-sm-12 mb-1">
+                <a href="notice.php" class="btn btn-primary"><span><i class="fas fa-bullhorn me-1"></i> </span> Add Notice</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
                 <a href="beneficiary.php" class="btn btn-primary"><span> <i class="fas fa-hand-holding-usd me-1"></i> </span> Add Beneficiary</a>
-              </div>
-              <div class="col-md-2 col-sm-12 mb-1">
-                <a href="notice.php" class="btn btn-primary"><span><i class="fas fa-bullhorn me-1"></i> </span> Add Notice</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
                 <a href="contribution.php" class="btn btn-primary"><span><i class="fas fa-money-bill-alt me-1"></i> </span> Add Contribution</a>

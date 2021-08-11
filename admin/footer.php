@@ -17,7 +17,7 @@
   </footer>
         <!-- end of footer  -->
 
-
+      <script src="../index.js"></script>
  
 
         <!-- JavaScript Bundle with Popper -->

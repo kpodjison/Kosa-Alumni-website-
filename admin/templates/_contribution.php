@@ -38,6 +38,14 @@
 
     
   }
+   // handling delet contribution 
+   if(isset($_GET['did']))
+   {
+                     
+            $admin->deleteContribution();          
+            
+   }
+
 
       // fetch all categories
       $allBenefitCategories = $admin->getBenefitCategory();
@@ -46,7 +54,6 @@
       $totalContributions = count($admin->getAllContributors());
       $totalBeneficiaries= count($admin->getBeneficiary(""));
       
-
     
    
 ?>
@@ -186,12 +193,12 @@
                   <td><?php echo htmlentities($contributor['date_time'] ) ?></td>
                   <td>
                   <div class="btn-group" role="group">                    
-                      <a href="contribution.php?eid=<?php echo htmlentities($contributor['contrb_id']); ?>" class="btn btn-warning me-2">Edit</a>
-                      <a href="contribution.php?did=<?php echo htmlentities($contributor['contrb_id']); ?>" class="btn btn-danger ms-1">Delete</a>
+                      <a href="editcont.php?eid=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-warning me-2">Edit</a>
+                      <a href="contribution.php?did=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-danger ms-1" onclick="return confirm('Are you sure you want to delete?'); ">Delete</a>
                     </div>
                   </td>
                   <td><?php echo htmlentities($contributor['creator'] ) ?></td>
-                 
+                  
     
                 </tr>
                 <?php  endforeach; ?>
@@ -202,5 +209,3 @@
       </div>
     </div>
 
-
-   

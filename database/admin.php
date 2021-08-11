@@ -479,7 +479,24 @@
                 }
         }
 
-              //get all beneficiaries
+              //get single contributors
+        public function getSingleContributor($id)
+        {                     
+                   
+                $sql = "SELECT * FROM contribution WHERE id='$id' ";
+                 
+                 $results = $this->db->conn->query($sql);
+                 $resultsArray = array();
+           
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $resultsArray[] = $item;
+                }            
+           
+                //final results returned
+            return $resultsArray;
+        }
+              //get all contributors
         public function getAllContributors()
         {                     
                    
@@ -496,6 +513,104 @@
                 //final results returned
             return $resultsArray;
         }
+
+
+
+            //delete admin function 
+           //delete comment 
+           public function deleteContribution()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['did']))
+                {
+                    $con_id = $_GET['did'];
+                    $sql = "DELETE FROM contribution WHERE id='$con_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Contribution Deleted successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
+        }
+
+
+         //edit post function 
+         public function editCont()
+         {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                 if(isset($_POST['ed_cont']))
+                {   
+                    if(!empty($_POST['contr_id']) || !empty($_POST['benef_details'])) 
+                    {
+                    
+                        $cont_id = $this->db->mysqli->real_escape_string($_POST['contr_id']);
+                        $cont_name= $this->db->mysqli->real_escape_string($_POST['c_name']);
+                        $ben_details = $this->db->mysqli->real_escape_string($_POST['benef_details']);
+                        $amount = $this->db->mysqli->real_escape_string($_POST['amount']);
+                        $author = $_SESSION['UserName']; 
+                        
+                        // fetch information coresponding to beneficiary
+                        $ben_id = $ben_type = "";
+                        $resultsArray = array();
+                        $sql_1 = "SELECT * FROM beneficiary WHERE id='$ben_details' ";
+                        $results = $this->db->conn->query($sql_1);
+                        while($item = mysqli_fetch_assoc($results) )
+                        {
+                            $resultsArray = $item;
+                        }
+                        $ben_id = $resultsArray['ben_id'];
+                        $ben_type = $resultsArray['ben_type'];
+                        //variable to hold update query
+                        $sql = "";
+    
+                        /*if beneficiary type is not changed */
+                        if(empty($ben_details)){
+                            $sql = "UPDATE contribution SET amount='$amount' WHERE id='$cont_id' ";
+                        }
+                        else if(empty($amount))
+                        {
+                            $sql = "UPDATE contribution SET benf_id='$ben_id',benf_type='$ben_type' WHERE id='$cont_id' ";
+                        }
+                        else if(!empty($amount) && !empty($ben_details) )
+                        {
+                            $sql = "UPDATE contribution SET benf_id='$ben_id',benf_type='$ben_type',amount='$amount' WHERE id='$cont_id' ";
+                        }
+    
+                        //check if  update was successfull
+                        if($this->db->conn->query($sql) === TRUE)
+                        {                        
+                            $_SESSION['SuccessMsg'] = "Contribution by {$cont_name}: Updated Successfully!";
+                            echo ' <script>window.location="../admin/contribution.php";</script>';
+                            // header('location:..\admin\post.php');      
+    
+                        }else
+                        {
+                            $_SESSION['ErrorMsg'] = "Sorry Unsuccessfully Update !";
+                            echo ' <script>window.location="../admin/contribution.php";</script>';
+                        }
+                          
+                        
+                    }
+                    else
+                    {
+                        $_SESSION['ErrorMsg'] = "Sorry There's Nothing To Update!!";
+                        echo ' <script>window.location="../admin/contribution.php";</script>';
+                    }
+ 
+                }
+            }
+             
+         }
+
   }
 
         
