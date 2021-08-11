@@ -1,8 +1,7 @@
 <?php
 // all posts 
     $allPosts = $post->getAllPost("");
-
- 
+    $LatestNotice = $admin->getLatestNotice();
 ?>
 
 <div class="container my-4" style="min-height:560px;">
@@ -38,13 +37,11 @@
                     <h3>Latest Notices</h3>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Ahenkan George Berieved</p>
-                    <hr>
-                    <p class="card-text">Namina Kassum's Upcommming wedding</p>
-                    <hr>
-                    <p class="card-text">Prosper Anane's wedding</p>
-                    <hr>
-                    <p class="card-text">Job Vaccancies</p>
+                    <?php  foreach($LatestNotice as $notice): ?>
+                        <p class="card-text"><?php  echo ucfirst(htmlentities($notice['heading'])) ?></p>
+                        <hr>
+                    <?php endforeach; ?>
+                    
                 </div>
             </div>
             <card class="card mb-3">

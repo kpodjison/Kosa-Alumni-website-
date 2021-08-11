@@ -384,6 +384,25 @@
                  return $resultsArray;
              }
     
+             //get all or single notice 
+             public function getLatestNotice()
+             { 
+               
+                    $sql = "SELECT * FROM notice ORDER BY id DESC LIMIT 0,5";
+                        
+                      
+                      $results = $this->db->conn->query($sql);
+                      $resultsArray = array();
+                
+                     while($item = mysqli_fetch_assoc($results))
+                     {
+                         $resultsArray[] = $item;
+                     }            
+                
+                     //final results returned
+                 return $resultsArray;
+             }
+    
           // function to add notice category
         public function addBenefitCategory()
         {
