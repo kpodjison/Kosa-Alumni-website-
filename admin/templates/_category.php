@@ -96,7 +96,7 @@
                   <td><?php echo htmlentities($category['date_time']) ?></td>
                   <td><?php echo htmlentities($category['title']) ?></td>
                   <td><?php echo htmlentities($category['author']) ?></td>
-                  <td class="text-center"><a href="category.php?catid=<?php echo htmlentities($category['id']); ?>" class="btn btn-danger">Delete</a></td>
+                  <td class="text-center"><a href="category.php?catid=<?php echo htmlentities($category['id']); ?>" class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete?'); ">Delete</a></td>
                  
                 </tr>
                 <?php  endforeach; ?>

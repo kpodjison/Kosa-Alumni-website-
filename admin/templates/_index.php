@@ -5,8 +5,8 @@
 <?php  
 
     // all notices
-    $allNotice = $admin->getNotice();
-    $totalNotice = count($admin->getNotice());
+    $allNotice = $admin->getNotice("");
+    $totalNotice = count($admin->getNotice(""));
     // print_r($allNotice);
     $allPosts = $post->getLatestPost(5);
     $totalPost = $post->getPostTotal();

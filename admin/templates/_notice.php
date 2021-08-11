@@ -33,6 +33,17 @@
     
   }
 
+  //delete notice
+  if(isset($_GET['ntdid']))
+  {
+    if(empty($_GET['ntdid'])){
+      $_SESSION['ErrorMsg'] = "Sorry Inavid Id!!";
+    }
+    else{
+      $admin->DeleteNotice();
+    }
+    
+  }
   //delete category 
   if(isset($_GET['catid']))
   {
@@ -47,7 +58,7 @@
 
     // fetch all categories
   $allNoticeCategories = $admin->getnoticeCategory();
-  $allNotice = $admin->getNotice();
+  $allNotice = $admin->getNotice("");
 ?>
 <div class="container-fluid px-0">  
   <div class="container-fluid bg-dark mb-2 py-2">
@@ -153,8 +164,8 @@
                   <td><?php echo htmlentities($notice['creator']) ?></td>
                   <td class="text-center">
                       <div class="btn-group" role="group">                    
-                        <a href="notice.php?notid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-success me-2">Edit</a>
-                        <a href="notice.php?notid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-danger ms-1">Delete</a>
+                        <a href="editnotice.php?nteid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-success me-2">Edit</a>
+                        <a href="notice.php?ntdid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-danger ms-1" onclick="return confirm('Are You Sure You Want To Delete This Notice?'); ">Delete</a>
                       </div>
                   </td>
                  

@@ -181,10 +181,9 @@
              return $resultsArray;
          }
 
-         //delete admin function 
-           //delete comment 
+         //delete admin function  
            public function DeleteAdmin()
-           {
+        {
             if($_SERVER['REQUEST_METHOD'] === 'GET')
             {
                 if(isset($_GET['admid']))
@@ -195,6 +194,29 @@
                     if($results == TRUE)
                     {
                         $_SESSION["SuccessMsg"] = "Admin Deleted successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
+        }
+         //delete notice function  
+           public function DeleteNotice()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['ntdid']))
+                {
+                    $notice_id = $_GET['ntdid'];
+                    $sql = "DELETE FROM notice WHERE id='$notice_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Notice Deleted successfully!";
                         
                     }
                     else
@@ -339,11 +361,17 @@
                 }
             }
     
-             //get all notice 
-             public function getNotice()
-             {                     
-             
-                      $sql = "SELECT * FROM notice";
+             //get all or single notice 
+             public function getNotice($id)
+             { 
+                $sql ="";                
+                         if(!empty($id)){
+                             $sql = "SELECT * FROM notice WHERE id='$id' ";
+                         }else
+                         {
+                            $sql = "SELECT * FROM notice";
+                         }
+                      
                       $results = $this->db->conn->query($sql);
                       $resultsArray = array();
                 
@@ -443,7 +471,7 @@
         }
 
                         // function to add beneficiary
-    public function addContribution()
+         public function addContribution()
         {
              if($_SERVER['REQUEST_METHOD'] === 'POST')
                 {
@@ -605,6 +633,50 @@
                         $_SESSION['ErrorMsg'] = "Sorry There's Nothing To Update!!";
                         echo ' <script>window.location="../admin/contribution.php";</script>';
                     }
+ 
+                }
+            }
+             
+         }
+         //edit notice function
+         public function editNotice()
+         {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                 if(isset($_POST['edit_not']))
+                {  
+                
+                        $notice_id = $this->db->mysqli->real_escape_string($_POST['id']);
+                        $heading= $this->db->mysqli->real_escape_string($_POST['heading']);
+                        $desc = $this->db->mysqli->real_escape_string($_POST['noticeDesc']);
+                        $type= $this->db->mysqli->real_escape_string($_POST['notice_type']);
+                        $dueDate= $this->db->mysqli->real_escape_string($_POST['dueDate']);
+                        $updator = $_SESSION['UserName']; 
+                        $sql = "";
+    
+                        /*if heading is not changed */
+                        if(empty($dueDate)){
+                            $sql = "UPDATE notice SET notice_type='$type',heading='$heading',descrip='$desc',updator='$updator' WHERE id='$notice_id' ";
+                        }
+                        else
+                        {
+                            $sql = $sql = "UPDATE notice SET notice_type='$type',heading='$heading',descrip='$desc',due_date='$dueDate',updator='$updator' WHERE id='$notice_id' ";
+                        }                        
+    
+                        //check if  update was successfull
+                        if($this->db->conn->query($sql) === TRUE)
+                        {                        
+                            $_SESSION['SuccessMsg'] = "Notice Updated Successfully!";
+                            echo ' <script>window.location="../admin/notice.php";</script>';
+                            // header('location:..\admin\notice.php');      
+    
+                        }else
+                        {
+                            $_SESSION['ErrorMsg'] = "Sorry Unsuccessfully Update !";
+                            // echo ' <script>window.location="../admin/notice.php";</script>';
+                        }                          
+                        
+                                       
  
                 }
             }
