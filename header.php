@@ -22,7 +22,7 @@ require('functions.php');?>
             
           
            
-            <title>Home|</title>
+            <title><?php echo $page_title; ?></title>
     </head>
   <body>
       <nav class="navbar navbar-expand-lg bg-kosa-blue navbar-light text-dark">

@@ -5,6 +5,8 @@ require('database/DBController.php');
 require('database/Alumni.php');
 require('database/admin.php');
 require('database/post.php');
+//require pageName class file
+require('PageName.php');
 
 
 //DBController object
@@ -28,5 +30,11 @@ $post = new Post($db);
 
 // fetch all categories
 $allCategories = $post->getAllCategories();
+
+
+// create pagename object
+$pageName = new PageName();
+$current_file_name = basename($_SERVER['PHP_SELF']);
+$page_title = $pageName->setPageName($current_file_name);
 
 ?>
