@@ -511,21 +511,20 @@
                                 {
                                     $resultsArray = $item;
                                 }
-                                $ben_id = $resultsArray['ben_id'];
+                                $ben_id = $resultsArray['id'];
                                 $ben_type = $resultsArray['ben_type'];
-                                $creator = "jeevista";
-                                    
+                                $creator = "jeevista";                                    
                                 $sql = "INSERT INTO contribution (contrb_id,benf_id,benf_type,amount,creator) VALUES ('$contr_id','$ben_id','$ben_type','$amount','$creator')";
-                                // $sql = "INSERT INTO contribution (contrb_id,ben_id,ben_type,amount,creator) VALUES ('contr_id','ben_id','ben_type','10','creator')";
+                                
                                     
-                                    if($this->db->conn->query($sql) === TRUE)
-                                    {
-                                        $_SESSION['SuccessMsg'] = "Contribution Made Successfully!";
+                                if($this->db->conn->query($sql) === TRUE)
+                                {
+                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!";
                                         
+                                }
+                                else {
+                                         $_SESSION['ErrorMsg'] = "Failed To Make Contribution!!";
                                     }
-                                    else {
-                                            $_SESSION['ErrorMsg'] = "Failed To Make Contribution!!";
-                                        }
                     }
                 }
         }
@@ -618,7 +617,7 @@
                         {
                             $resultsArray = $item;
                         }
-                        $ben_id = $resultsArray['ben_id'];
+                        $ben_id = $resultsArray['id'];
                         $ben_type = $resultsArray['ben_type'];
                         //variable to hold update query
                         $sql = "";
@@ -705,6 +704,25 @@
             }
              
          }
+
+
+                //get the sum of all contributions
+        public function getTotalContribution()
+        {                     
+                   
+                $sql = "SELECT * FROM contribution";
+                 
+                 $results = $this->db->conn->query($sql);
+                 $totalContrb = 0;
+           
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $totalContrb += $item['amount'];
+                }            
+           
+                //final results returned
+            return $totalContrb;
+        }
 
   }
 

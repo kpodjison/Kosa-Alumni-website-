@@ -53,6 +53,7 @@
       $allContributors = $admin->getAllContributors();
       $totalContributions = count($admin->getAllContributors());
       $totalBeneficiaries= count($admin->getBeneficiary(""));
+      $totalContribution= $admin->getTotalContribution();
       
     
    
@@ -72,21 +73,21 @@
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Amount Donated</h3>
-            <p><span><i class="fas fa-readme"></i> </span><?php echo $totalNotice??0;?></p>
+            <p><span><i class="fas fa-money-bill-alt me-1"></i> </span><?php echo $totalContribution??0;?></p>
           </div>
           
         </div>
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Beneficiaries</h3>
-            <p><span><i class="fas fa-readme"></i> </span> <?php echo $totalBeneficiaries??0;?> </p>
+            <p><span> <i class="fas fa-hand-holding-usd me-1"></i> </span> <?php echo $totalBeneficiaries??0;?> </p>
           </div>
           
         </div>
         <div class="card bg-dark text-white text-center mb-3">
           <div class="card-header">
             <h3>Contributions</h3>
-            <p><span><i class="fas fa-readme"></i> </span> <?php echo $totalContributions??0;?> </p>
+            <p><span><i class="fas fa-hands-helping"></i></span> <?php echo $totalContributions??0;?> </p>
           </div>
           
         </div>
