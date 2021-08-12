@@ -9,18 +9,39 @@
         <div class="col-lg-9">
         
             <h2><span><i class="fas fa-blog me-1 text-primary"></i></span> Kosa Blog</h2>
-            <?php foreach($allPosts as $post): ?>
-            <div class="card p-3 mb-4">
-                <img src="assets/uploads/<?php echo htmlentities($post['post_img']); ?>" alt="post-img" class="card-img img-fluid" style="max-height:450px;">
+            <?php foreach($allPosts as $item):                 
+                $allApprovedComments = count($post->getApprovedComments($item['id']));
+                ?>
+                <div class="card p-3 mb-4">
+                <img src="assets/uploads/<?php echo htmlentities($item['post_img']); ?>" alt="post-img" class="card-img img-fluid" style="max-height:450px;">
                 <card-body>
-                    <h3><?php echo htmlentities($post['title']); ?></h3>
-                    <small class="lead">Written By: <?php echo htmlentities($post['author']); ?> on <?php echo htmlentities($post['date_time']); ?></small>
+                    <h3><?php echo htmlentities($item['title']); ?></h3>
+                    <div class="d-flex flex-row justify-content-between">
+                       <small class="lead">Written By: <?php echo htmlentities($item['author']); ?> on <?php echo htmlentities($item['date_time']); ?></small>
+                        <?php 
+                                    if($allApprovedComments > 0)
+                                    {
+                                   
+                                        if($allApprovedComments > 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comments '.$allApprovedComments.'</span></small>';
+                                
+                                        } 
+                                        if($allApprovedComments == 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comment '.$allApprovedComments.'</span></small>';
+                                        }
+                                    }
+                        ?>
+                    </div>
+                    
                     <hr>
-                    <p class="card-text"><?php echo htmlentities($post['post_desc']); ?></p>
-                    <a href="fullpost.php?id=<?php echo htmlentities($post['id']); ?>" class="btn btn-primary float-end"> <span>Read More >></span> </a>
+                    <p class="card-text"><?php echo htmlentities($item['post_desc']); ?></p>
+                    <a href="fullpost.php?id=<?php echo htmlentities($item['id']); ?>" class="btn btn-primary float-end"> <span>Read More >></span> </a>
                 </card-body>
             </div>
             <?php endforeach; ?>
+          
 
         </div>
         <!-- start of left side bar  -->

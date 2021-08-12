@@ -68,12 +68,30 @@
                 ?>
             <?php
                 foreach($singlePost as $single):
+                    $allApprovedComments = count($post->getApprovedComments($single['id']));
             ?>
             <div class="card p-3 mb-4">
                 <img src="assets/uploads/<?php echo htmlentities($single['post_img']); ?>" alt="post-img" class="card-img img-fluid mb-1" style="max-height:450px;">
                 <card-body>
                     <h3><?php echo htmlentities($single['title']); ?></h3>
-                    <small class="lead">Written By: <?php echo htmlentities($single['author']); ?> on <?php echo htmlentities($single['date_time']); ?></small>
+                    <div class="d-flex flex-row justify-content-between">
+                       <small class="lead">Written By: <?php echo htmlentities($single['author']); ?> on <?php echo htmlentities($single['date_time']); ?></small>
+                        <?php 
+                                    if($allApprovedComments > 0)
+                                    {
+                                   
+                                        if($allApprovedComments > 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comments '.$allApprovedComments.'</span></small>';
+                                
+                                        } 
+                                        if($allApprovedComments == 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comment '.$allApprovedComments.'</span></small>';
+                                        }
+                                    }
+                        ?>
+                    </div>
                     <hr>
                     <p class="card-text"><?php echo htmlentities($single['post_desc']); ?></p>                    
                 </card-body>
