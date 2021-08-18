@@ -513,13 +513,18 @@
                                 }
                                 $ben_id = $resultsArray['id'];
                                 $ben_type = $resultsArray['ben_type'];
+                                $ben_amount = $resultsArray['amount'];
+                                $new_amount = $ben_amount + $amount;
+                                $sql_2 ="UPDATE beneficiary SET amount= '$new_amount' WHERE id='$ben_id' ";
                                 $creator = "jeevista";                                    
                                 $sql = "INSERT INTO contribution (contrb_id,benf_id,benf_type,amount,creator) VALUES ('$contr_id','$ben_id','$ben_type','$amount','$creator')";
                                 
                                     
-                                if($this->db->conn->query($sql) === TRUE)
+                                if($this->db->conn->query($sql) === TRUE && $this->db->conn->query($sql_2) === TRUE)
                                 {
-                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!";
+                                    // if($this->db->conn->query($sql_2) === TRUE){
+                                   
+                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!".$new_amount;
                                         
                                 }
                                 else {

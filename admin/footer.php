@@ -12,6 +12,8 @@
         <div class="col">
           <p class="text-center"> &copy;KOSA <?php echo date("Y");?></p>
         </div>
+        <hr class="mx-3 my-0">
+            <small class="lead">Powered by @Jeevista</small>
       </div>
     </div>
   </footer>
