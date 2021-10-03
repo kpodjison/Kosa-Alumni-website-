@@ -6,8 +6,8 @@
 
 
  <!-- start of footer  -->
-   <footer> 
-      <div class="container-fluid bg-dark text-white">
+   <footer class="site_footer container-fluid p-0"> 
+      <div class="container-fluid bg-dark text-white py-2">
          <div class="row">
             <div class="col-lg-12">
                <p class="text-center">&copy;KOSA <?php echo date("Y");?></p>

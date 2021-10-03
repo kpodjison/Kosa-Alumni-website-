@@ -6,17 +6,18 @@
 
 
        <!-- start of footer  -->
-  <footer class="bg-dark text-white">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <p class="text-center"> &copy;KOSA <?php echo date("Y");?></p>
-        </div>
-        <hr class="mx-3 my-0">
+       <footer class="site_footer container-fluid p-0"> 
+      <div class="container-fluid bg-dark text-white py-2">
+         <div class="row">
+            <div class="col-lg-12">
+               <p class="text-center">&copy;KOSA <?php echo date("Y");?></p>
+            </div>
+            <hr class="mx-3 my-0">
             <small class="lead">Powered by @Jeevista</small>
+
+         </div>
       </div>
-    </div>
-  </footer>
+   </footer>
         <!-- end of footer  -->
 
       <script src="../index.js"></script>
