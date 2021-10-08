@@ -257,8 +257,8 @@
          //get all alumni function
          public function getAllAlumni()
          {                     
-         
-                  $sql = "SELECT * FROM alumni";
+            
+                  $sql = "SELECT * FROM alumni ORDER BY id DESC LIMIT 0,10";
                   $results = $this->db->conn->query($sql);
                   $resultsArray = array();
             
@@ -301,7 +301,32 @@
                   //final results returned
               return $resultsArray;
           }
-
+          //get all alumni
+          public function getPaginationMemb()
+          {
+              //Variable to hold all results 
+              $resultsArray = array();
+  
+             if(isset($_GET['page']))
+              {
+                  $page = $_GET['page'];
+                  if($page == 0 || $page < 0){
+                      $showPostFrom = 0;
+                  }
+                  else{
+                      $showPostFrom = ($page*10)-10;
+                  }
+                  
+                  $sql = "SELECT * FROM alumni ORDER BY id DESC LIMIT $showPostFrom,10";
+                  $results = $this->db->conn->query($sql);
+                  while($item = mysqli_fetch_assoc($results))
+                  {
+                      $resultsArray[] = $item;                
+                   }
+              }        
+      
+              return $resultsArray;
+          }
           // function to add notice category
         public function noticeCategory()
         {
@@ -524,7 +549,7 @@
                                 {
                                     // if($this->db->conn->query($sql_2) === TRUE){
                                    
-                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!".$new_amount;
+                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!";
                                         
                                 }
                                 else {

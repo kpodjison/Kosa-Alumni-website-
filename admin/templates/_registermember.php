@@ -1,4 +1,4 @@
-      <div class="row text-white">
+     <div class="row text-white">
       
           <div class="container regform col-sm-12 col-lg-6 "  id="regform" >
                   <h4 style="color:#fff;text-align:center;font-size:29px;background:black;padding:2px;">Register An Alumni </h4>
