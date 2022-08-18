@@ -265,8 +265,8 @@
          //get all alumni function
          public function getAllAlumni()
          {                     
-         
-                  $sql = "SELECT * FROM alumni";
+            
+                  $sql = "SELECT * FROM alumni ORDER BY id DESC LIMIT 0,10";
                   $results = $this->db->conn->query($sql);
                   $resultsArray = array();
             
@@ -309,7 +309,32 @@
                   //final results returned
               return $resultsArray;
           }
-
+          //get all alumni
+          public function getPaginationMemb()
+          {
+              //Variable to hold all results 
+              $resultsArray = array();
+  
+             if(isset($_GET['page']))
+              {
+                  $page = $_GET['page'];
+                  if($page == 0 || $page < 0){
+                      $showPostFrom = 0;
+                  }
+                  else{
+                      $showPostFrom = ($page*10)-10;
+                  }
+                  
+                  $sql = "SELECT * FROM alumni ORDER BY id DESC LIMIT $showPostFrom,10";
+                  $results = $this->db->conn->query($sql);
+                  while($item = mysqli_fetch_assoc($results))
+                  {
+                      $resultsArray[] = $item;                
+                   }
+              }        
+      
+              return $resultsArray;
+          }
           // function to add notice category
         public function noticeCategory()
         {
@@ -550,6 +575,7 @@
                                 $contr_id = $this->db->mysqli->real_escape_string($_POST['contr_id']);
                                 $ben_details = $this->db->mysqli->real_escape_string($_POST['benef_details']);
                                 $amount = $this->db->mysqli->real_escape_string($_POST['amount']);
+<<<<<<< HEAD
                                 $all_query_status = true;
                                 //Start of Transaction
                                 mysqli_begin_transaction($this->db->conn);
@@ -601,6 +627,30 @@
                                             $all_query_status = false;
                                             echo "<script>console.log(\"Insert into contributor list Failed\")</script>";     
                                         } 
+=======
+                                $sql_1 = "SELECT * FROM beneficiary WHERE id='$ben_details' ";
+                                $results = $this->db->conn->query($sql_1);
+                                $ben_id = $ben_type = "";
+                                $resultsArray = array();
+                                while($item = mysqli_fetch_assoc($results) )
+                                {
+                                    $resultsArray = $item;
+                                }
+                                $ben_id = $resultsArray['id'];
+                                $ben_type = $resultsArray['ben_type'];
+                                $ben_amount = $resultsArray['amount'];
+                                $new_amount = $ben_amount + $amount;
+                                $sql_2 ="UPDATE beneficiary SET amount= '$new_amount' WHERE id='$ben_id' ";
+                                $creator = "jeevista";                                    
+                                $sql = "INSERT INTO contribution (contrb_id,benf_id,benf_type,amount,creator) VALUES ('$contr_id','$ben_id','$ben_type','$amount','$creator')";
+                                
+                                    
+                                if($this->db->conn->query($sql) === TRUE && $this->db->conn->query($sql_2) === TRUE)
+                                {
+                                    // if($this->db->conn->query($sql_2) === TRUE){
+                                   
+                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!";
+>>>>>>> 71d2934a6e6ad115d3ee8a201e54e388d38b71ae
                                         
                                     if($all_query_status)
                                     {

@@ -122,7 +122,7 @@
                             <?php endforeach;  ?> 
                             <div class="form-group mb-2">
                             <label for="amount" class="mb-1">Amount</label>
-                            <input type="text"  name="amount" id="amount" class="form-control" value="">
+                            <input type="text"  name="amount" id="amount" class="form-control" value="" required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6  text-center text-white ">

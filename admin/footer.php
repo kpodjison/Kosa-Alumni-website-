@@ -6,6 +6,7 @@
 
 
        <!-- start of footer  -->
+<<<<<<< HEAD
   <footer class="text-white">
     <div class="container">
       <div class="row">
@@ -14,9 +15,20 @@
         </div>
         <hr class="mx-3 my-0">
             <small class="lead" style="font-size:16px;">Powered by @Jeevista</small>
+=======
+       <footer class="site_footer container-fluid p-0"> 
+      <div class="container-fluid bg-dark text-white py-2">
+         <div class="row">
+            <div class="col-lg-12">
+               <p class="text-center">&copy;KOSA <?php echo date("Y");?></p>
+            </div>
+            <hr class="mx-3 my-0">
+            <small class="lead">Powered by @Jeevista</small>
+
+         </div>
+>>>>>>> 71d2934a6e6ad115d3ee8a201e54e388d38b71ae
       </div>
-    </div>
-  </footer>
+   </footer>
         <!-- end of footer  -->
 
         <!-- jquery cdn  -->

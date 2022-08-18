@@ -35,6 +35,20 @@
     $allAlumni = $admin->getAllAlumni();    
     //print_r($allAlumni);
 
+          //fetching all post from pagination link
+          if(isset($_GET['page']))
+          {   
+              if(is_numeric($_GET['page']))
+              {
+                $allAlumni = $admin->getPaginationMemb();
+              }else
+              {
+                  $_GET['page'] = 1;
+                  $allAlumni = $admin->getPaginationMemb();
+              }
+              
+          }
+
 ?>
 <div class="container-fluid px-0">  
   <div class="container-fluid bg-dark mb-2 py-2">
@@ -155,8 +169,73 @@
                 </tr>
                 <?php  endforeach; ?>
               </tbody>
-            </table>
+            </table>            
             </div>  
+              <!-- start of pagination  -->
+   <ul class="pagination pagination-lg justify-content-center">
+
+      <?php  
+              $TotalAlumni = count($admin->getAllAlumni());
+          // echo $TotalAlumni;
+              $pagination = ceil($TotalAlumni/10);
+              // echo $pagination;
+              //variable to hold current page id  
+              $currentPage = null;
+
+              /*set page to 1 by default if it's empty or if its greater 
+              than the total number of posts 
+              */
+              if(empty($_GET['page'])){
+              $_GET['page'] = 1;
+          }
+          
+      ?>
+
+    <!-- start of backward button  -->
+    <?php
+            if(isset($_GET['page']))
+            {   
+                $currentPage = $_GET['page'];  
+                $PrevPage = $_GET['page'] - 1;
+                if($currentPage > 1 && $currentPage <=$pagination){
+                        echo '<li class="page-item">
+                        <a href="members.php?page='.$PrevPage.'"class="page-link">&laquo;</a>
+                            </li> ';
+                }                                   
+            }
+
+        ?>
+        <!-- end of backward button  -->
+      <?php              
+          for($i = 1; $i <= $pagination; $i++)
+          {    
+          $currentPage = $_GET['page'];
+          if( $i == $currentPage )
+          {
+              echo '<li class="page-item active" ><a href="members.php?page='.$i.'" class="page-link">'.$i.'</a></li>';
+          }
+          else
+          echo '<li class="page-item" ><a href="members.php?page='.$i.'" class="page-link">'.$i.'</a></li>';
+          }
+      ?>
+
+          <!-- //start of forward button  -->
+      <?php
+          $NextPage = $_GET['page'] + 1;
+
+          if(isset($_GET['page']))
+          {
+          if($NextPage <= $pagination)
+          {
+          echo '<li class="page-item" ><a href="index.php?page='.$NextPage.'" class="page-link">&raquo;</a></li>';
+          }
+
+          }
+      ?>
+          <!-- //end of forward button  -->
+   </ul>
+          <!-- end of pagination  -->
+            
   
           <!-- //end of members table  -->
 
