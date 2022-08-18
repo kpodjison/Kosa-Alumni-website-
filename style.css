@@ -1,0 +1,87 @@
+/*google fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Baloo+Thambi+2&family=Raleway&family=Rubik&display=swap");
+/*font variable*/
+/*color variables*/
+.color-primary {
+  color: #ffffff;
+}
+
+.color-secondary {
+  color: #00b8e6;
+}
+
+.bg-trasp {
+  background: #0004;
+}
+
+.bg-kosa-blue {
+  background: #00b8e6;
+}
+
+.bg-kosa-red {
+  background: #9d0004;
+}
+
+.bg-kosa-1 {
+  background: #e89a09;
+}
+
+.bg-kosa-2 {
+  background: #e4fa23;
+}
+
+.bg-kosa-3 {
+  background: #09edde;
+}
+
+/*typograph template */
+.font-rale {
+  font-family: "Raleway", cursive;
+}
+
+.font-rubik {
+  font-family: "Rubik", cursive;
+}
+
+.font-baloo {
+  font-family: "Baloo Thambi 2", cursive;
+}
+
+.font-acme {
+  font-family: "Acme", cursive;
+}
+
+/*admin style imports*/
+/*main page style*/
+/*about us style*/
+.top_container {
+  background: url(./images/adult.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.top_container .kosa_about {
+  background: #0004;
+  margin-top: 50px;
+}
+
+.top_container h1 {
+  color: #fff;
+  font-family: cambria;
+}
+
+.top_container h1 {
+  font-size: 58px;
+}
+
+#abt {
+  font-size: 24px;
+}
+
+.site_footer {
+  font-size: 28px;
+  height: 40px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */
