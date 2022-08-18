@@ -23,9 +23,10 @@
                     $user_name = $this->db->mysqli->real_escape_string($_POST['Username']);
                     $name = $this->db->mysqli->real_escape_string($_POST['Name']);
                     $password = $this->db->mysqli->real_escape_string($_POST['Password']);
+                    $hash_psw = password_hash($password,PASSWORD_DEFAULT);
                     $admin = "Jeevista";
 
-                    $sql = "INSERT INTO admins(username,a_name,password,added_by) VALUES ('$user_name','$name','$password','$admin')";
+                    $sql = "INSERT INTO admins(username,a_name,password,added_by) VALUES ('$user_name','$name','$hash_psw','$admin')";
                     
                     // query to check if db has an existing admin username similar to the new username
                     $user_name_check_sql = "SELECT username FROM admins WHERE username = '$user_name'";
@@ -100,29 +101,36 @@
                 if(isset($_POST['admin_login']))
                 {
                     $user_name = $this->db->mysqli->real_escape_string($_POST['Username']);
-                    $password = $this->db->mysqli->real_escape_string($_POST['Password']);
+                    $a_password = $this->db->mysqli->real_escape_string($_POST['Password']);
 
-                    $sql = "SELECT * FROM admins WHERE username='$user_name' AND password='$password' ";
+                    $sql = "SELECT * FROM admins WHERE username='$user_name' ";
                     $results = $this->db->conn->query($sql);
-                    if($item = mysqli_fetch_assoc($results))
+                    $item = mysqli_fetch_assoc($results);
+                    if($item != null)
                     {
-
-                        $_SESSION['UserId']  = $item['id'];
-                        $_SESSION['UserName']  = $item['username'];
-                        $_SESSION['AdminName']  = $item['a_name'];
-                        $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
-                        if(isset($_SESSION['UrlTracker'])){
-                            // header('Location:'.$_SESSION['UrlTracker']);
-                            echo '<script>window.location="'.$_SESSION['UrlTracker'].'";</script>';
-                         
-                        }else
+                        $hash_psw = $item['password'];
+                        if(password_verify($a_password,$hash_psw))
                         {
-                        //    header('Location:../admin/index.php'); 
-                        echo '<script>window.location="../admin/index.php";</script>';
-                           
-                           
-                           
-                        }                       
+                            $_SESSION['UserId']  = $item['id'];
+                            $_SESSION['UserName']  = $item['username'];
+                            $_SESSION['AdminName']  = $item['a_name'];
+                            $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
+                            if(isset($_SESSION['UrlTracker'])){
+                                // header('Location:'.$_SESSION['UrlTracker']);
+                                echo '<script>window.location="'.$_SESSION['UrlTracker'].'";</script>';
+                            
+                            }
+                            else
+                                {
+                                //    header('Location:../admin/index.php'); 
+                                echo '<script>window.location="../admin/index.php";</script>';
+                                
+                                }                          
+                        }
+                        else
+                        {
+                            $_SESSION['ErrorMsg']  = "Incorrect Username or Password!!";
+                        }                      
                         
                     }
                     else
@@ -362,7 +370,7 @@
             }
     
              //get all or single notice 
-             public function getNotice($id)
+             public function getNotice($id=null)
              { 
                 $sql ="";                
                          if(!empty($id)){
@@ -439,7 +447,7 @@
                  //final results returned
              return $resultsArray;
          }
-                        // function to add beneficiary
+          // function to add beneficiary
          public function addBeneficiary()
          {
                             if($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -462,15 +470,54 @@
                             }
         }
 
+        //function to change contribution status
+        public function changeContributionStatus()
+        {
+            if(isset($_SERVER['REQUEST_METHOD']) == 'GET')
+            {
+                if(isset($_GET['benstatus']))
+                {
+                    $status = $_GET['benstatus'];
+                    $benid = $_GET['benid'];
+                    if(!empty($status))
+                    {
+                        if($status == "open")
+                        {
+                            $sql = "UPDATE beneficiary SET status = 'closed' WHERE ben_id='$benid' ";
+                        }
+                        else if($status == "closed")
+                        {
+                            $sql = "UPDATE beneficiary SET status = 'open' WHERE ben_id='$benid' ";
+                        }
+                        
+                        $results = $this->db->conn->query($sql);
+                        if($results)
+                        {
+                            $_SESSION['SuccessMsg'] = "Contribution Status Changed To Successfully!!"; 
+                        }
+                        else
+                            {
+                                $_SESSION['ErrorMsg'] = "Failed To Change Contribution Status!!";            
+                            }
+                    }
+                    else
+                        {
+                            $_SESSION['ErrorMsg'] = "Failed To Change Contribution Status!!";                
+                        }
+                }
+              }
+
+        }
+
         //get all beneficiaries
         public function getBeneficiary($flag)
         {                     
                     if($flag == "p"){
-                        $sql = "SELECT * FROM beneficiary WHERE status='in-progress'";
+                        $sql = "SELECT * FROM beneficiary WHERE status='open'";
                     }
                     else if($flag == "d")
                     {
-                        $sql = "SELECT * FROM beneficiary WHERE status='done'";
+                        $sql = "SELECT * FROM beneficiary WHERE status='closed'";
 
                     }
                     else if(is_numeric($flag))
@@ -503,33 +550,79 @@
                                 $contr_id = $this->db->mysqli->real_escape_string($_POST['contr_id']);
                                 $ben_details = $this->db->mysqli->real_escape_string($_POST['benef_details']);
                                 $amount = $this->db->mysqli->real_escape_string($_POST['amount']);
-                                $sql_1 = "SELECT * FROM beneficiary WHERE id='$ben_details' ";
-                                $results = $this->db->conn->query($sql_1);
-                                $ben_id = $ben_type = "";
-                                $resultsArray = array();
-                                while($item = mysqli_fetch_assoc($results) )
-                                {
-                                    $resultsArray = $item;
-                                }
-                                $ben_id = $resultsArray['id'];
-                                $ben_type = $resultsArray['ben_type'];
-                                $ben_amount = $resultsArray['amount'];
-                                $new_amount = $ben_amount + $amount;
-                                $sql_2 ="UPDATE beneficiary SET amount= '$new_amount' WHERE id='$ben_id' ";
-                                $creator = "jeevista";                                    
-                                $sql = "INSERT INTO contribution (contrb_id,benf_id,benf_type,amount,creator) VALUES ('$contr_id','$ben_id','$ben_type','$amount','$creator')";
-                                
-                                    
-                                if($this->db->conn->query($sql) === TRUE && $this->db->conn->query($sql_2) === TRUE)
-                                {
-                                    // if($this->db->conn->query($sql_2) === TRUE){
-                                   
-                                     $_SESSION['SuccessMsg'] = "Contribution Made Successfully!".$new_amount;
-                                        
-                                }
-                                else {
-                                         $_SESSION['ErrorMsg'] = "Failed To Make Contribution!!";
+                                $all_query_status = true;
+                                //Start of Transaction
+                                mysqli_begin_transaction($this->db->conn);
+                                try{
+                                    //Query 1:
+                                    $sql_1 = "SELECT * FROM beneficiary WHERE id='$ben_details' ";
+                                    $results = $this->db->conn->query($sql_1);
+                                    $ben_id = $ben_type = "";
+                                    $resultsArray = array();
+                                    if(mysqli_num_rows($results) > 0)
+                                    {
+                                        while($item = mysqli_fetch_assoc($results) )
+                                        {
+                                            $resultsArray = $item;
+                                        }
+                                        $ben_id = $resultsArray['id'];
+                                        $ben_type = $resultsArray['ben_type'];
+                                        $ben_amount = $resultsArray['amount'];
+                                        $new_amount = $ben_amount + $amount;                                        
                                     }
+                                    else
+                                        {
+                                            $all_query_status = false;
+                                        }
+
+                                    // Query 2:
+                                    $sql_2 ="UPDATE beneficiary SET amount= '$new_amount' WHERE id='$ben_id' ";
+                                    $results = $this->db->conn->query($sql_2);
+                                    if($results === true)
+                                    {
+                                        echo "<script>console.log(\"Beneficiary amount update successful\")</script>";                                                              
+                                    }
+                                    else
+                                        {
+                                            $all_query_status = false;
+                                            echo "<script>console.log(\"Beneficiary amount update Failed\")</script>";   
+                                        }  
+
+                                    // Query 3:
+                                    $creator = "jeevista";                                    
+                                    $sql_3 = "INSERT INTO contribution (contrb_id,benf_id,benf_type,amount,creator) VALUES ('$contr_id','$ben_id','$ben_type','$amount','$creator')";
+                                    $results = $this->db->conn->query($sql_3);
+                                    if($results === true)
+                                    {
+                                        echo "<script>console.log(\"Insert into contributor list successful\")</script>";                                                              
+                                    }
+                                    else
+                                        {
+                                            $all_query_status = false;
+                                            echo "<script>console.log(\"Insert into contributor list Failed\")</script>";     
+                                        } 
+                                        
+                                    if($all_query_status)
+                                    {
+                                        mysqli_commit($this->db->conn);                                     
+                                        $_SESSION['SuccessMsg'] = "Contribution Made Successfully!".$new_amount;
+                                            
+                                    }
+                                    else {
+                                            mysqli_rollback($this->db->conn);
+                                            $_SESSION['ErrorMsg'] = "Failed To Make Contribution!!";
+                                        }
+                                   
+
+                                }
+                                catch(mysqli_sql_exception $e){
+                                    mysqli_rollback($this->db->conn);
+                                    echo "<script>console.log('Db Rolled Back');</script>";
+                                    throw $e;
+                                }
+                                //End of Transaction
+                              
+                               
                     }
                 }
         }

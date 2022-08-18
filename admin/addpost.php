@@ -8,7 +8,13 @@
    <!-- ----------------------------start of addposttemplate--------------------------  -->
 <?php
 
-     include('../admin/templates/_addpost.php');
+  if(isset($_GET['type']) && $_GET['type'] == "kosagram")
+  {
+    include('../admin/templates/_addkosagram.php');
+  }
+  else{
+    include('../admin/templates/_addpost.php');    
+  }
 
 ?>
 <!-- --------------------------end of template ----------------------------------  -->

@@ -29,22 +29,22 @@
        </div>         
         <div class="row mb-2">
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="addpost.php" class="btn bg-primary text-white"><span><i class="fas fa-plus me-1"></i> </span> Add Post</a>
+                <a href="addpost.php" class="btn btn-sm bg-primary text-white"><span><i class="fas fa-plus me-1"></i> </span> Add Post</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="category.php" class="btn btn-primary"><span><i class="fab fa-buffer me-1"></i> </span> Add Category</a>
+                <a href="category.php" class="btn btn-sm btn-primary"><span><i class="fab fa-buffer me-1"></i> </span> Add Category</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="members.php" class="btn btn-primary"><span><i class="fas fa-user me-1"></i> </span> Add User</a>
+                <a href="members.php" class="btn btn-sm btn-primary"><span><i class="fas fa-user me-1"></i> </span> Add User</a>
               </div>              
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="notice.php" class="btn btn-primary"><span><i class="fas fa-bullhorn me-1"></i> </span> Add Notice</a>
+                <a href="notice.php" class="btn btn-sm btn-primary"><span><i class="fas fa-bullhorn me-1"></i> </span> Add Notice</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="beneficiary.php" class="btn btn-primary"><span> <i class="fas fa-hand-holding-usd me-1"></i> </span> Add Beneficiary</a>
+                <a href="beneficiary.php" class="btn btn-sm btn-primary"><span> <i class="fas fa-hand-holding-usd me-1"></i> </span> Add Beneficiary</a>
               </div>
               <div class="col-md-2 col-sm-12 mb-1">
-                <a href="contribution.php" class="btn btn-primary"><span><i class="fas fa-money-bill-alt me-1"></i> </span> Add Contribution</a>
+                <a href="contribution.php" class="btn btn-sm btn-primary"><span><i class="fas fa-money-bill-alt me-1"></i> </span> Add Contribution</a>
               </div>           
          </div>
 
@@ -131,7 +131,7 @@
                               ?>
                           </span>  
                       <td><?php echo htmlentities($notice['creator']) ?></td>
-                      <td><a href="" class="btn btn-primary" target="_blank">Preview</a></td>
+                      <td><a href="" class="btn btn-sm btn-primary" target="_blank">Preview</a></td>
                     </tr>
                     <?php  endforeach; ?>
                   </tbody>
@@ -170,7 +170,7 @@
                                     <td><?php  echo htmlentities($post['author'])?></td>                                    
                                     <td>comment</td>                    
                                     <td>
-                                    <a href="../fullpost.php?id=<?php echo htmlentities($post['id']) ?>" class="btn btn-primary me-2" target="_blank">Preview</a>
+                                    <a href="../fullpost.php?id=<?php echo htmlentities($post['id']) ?>" class="btn btn-primary btn-sm me-2" target="_blank">Preview</a>
                                     </td>
                                     
                                   </tr>

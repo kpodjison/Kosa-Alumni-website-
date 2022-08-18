@@ -73,19 +73,19 @@
               <div class="card-body bg-dark text-white">
                 <div class="form-group mb-2">
                   <label for="Username" class="mb-1">User Name</label>
-                  <input type="text" id="Username" name="Username" class="form-control">
+                  <input type="text" id="Username" name="Username" class="form-control form-control-sm ">
                 </div>
                 <div class="form-group mb-2">
                   <label for="Name" class="mb-1">Name</label>
-                  <input type="text" id="Name" name="Name" class="form-control">
+                  <input type="text" id="Name" name="Name" class="form-control form-control-sm ">
                 </div>
                 <div class="form-group mb-2">
                   <label for="Password" class="mb-1">Password</label>
-                  <input type="password" id="Password" name="Password" class="form-control">
+                  <input type="password" id="Password" name="Password" class="form-control form-control-sm ">
                 </div>
                 <div class="form-group mb-2">
                   <label for="ConfirmPassword" class="mb-1">Confirm Password</label>
-                  <input type="ConfirmPassword" id="" name="ConfirmPassword" class="form-control">
+                  <input type="ConfirmPassword" id="" name="ConfirmPassword" class="form-control form-control-sm">
                 </div>
                 <div class="row">
                     <div class="col-lg-6  text-center text-white ">
@@ -129,7 +129,7 @@
                         <td><?php echo htmlentities($admin['username']) ?></td>
                         <td><?php echo htmlentities($admin['a_name']) ?></td>
                         <td><?php echo htmlentities($admin['added_by']) ?></td>
-                        <td class="text-center"><a href="admins.php?admid=<?php echo htmlentities($admin['id']); ?>" class="btn btn-danger">Delete</a></td>
+                        <td class="text-center"><a href="admins.php?admid=<?php echo htmlentities($admin['id']); ?>" class="btn btn-sm btn-danger">Delete</a></td>
                       
                       </tr>
                       <?php  endforeach; ?>

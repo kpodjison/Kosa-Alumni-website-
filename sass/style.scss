@@ -6,9 +6,10 @@
 @import './include/typography.scss';
 
 /*admin style imports*/
-
+@import'./include/adminstyle/adm-style.scss';
 /*main page style*/
 
 @import'./include/about-us';
 
 @import'./include/footer';
+

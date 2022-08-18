@@ -37,7 +37,7 @@
                     
                     <hr>
                     <p class="card-text"><?php echo htmlentities($item['post_desc']); ?></p>
-                    <a href="fullpost.php?id=<?php echo htmlentities($item['id']); ?>" class="btn btn-primary float-end"> <span>Read More >></span> </a>
+                    <a href="fullpost.php?id=<?php echo htmlentities($item['id']); ?>" class="btn btn-primary btn-sm float-end"> <span>Read More >></span> </a>
                 </card-body>
             </div>
             <?php endforeach; ?>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body">
                     <?php  foreach($LatestNotice as $notice): ?>
-                        <p class="card-text"><?php  echo ucfirst(htmlentities($notice['heading'])) ?></p>
+                        <a class="card-text" href="./notice.php" style="text-decoration:none;"><?php  echo ucfirst(htmlentities($notice['heading'])) ?></a>
                         <hr>
                     <?php endforeach; ?>
                     
@@ -72,7 +72,7 @@
                 <div class="card-body">
                     <?php foreach($allCategories as $categories): 
                         
-                        echo '<a href="#" class="card-text d-block">'.ucfirst($categories["title"]).'</a>'; ?>
+                        echo '<a href="#" class="card-text d-block mb-2" style="text-decoration:none;">'.ucfirst($categories["title"]).'</a>'; ?>
 
                      <?php  endforeach; ?>
                 </div>

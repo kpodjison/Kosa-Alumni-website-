@@ -207,8 +207,8 @@
                       <td><?php echo htmlentities($contributor['date_time'] ) ?></td>
                       <td>
                       <div class="btn-group" role="group">                    
-                          <a href="editcont.php?eid=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-warning me-2">Edit</a>
-                          <a href="contribution.php?did=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-danger ms-1" onclick="return confirm('Are you sure you want to delete?'); ">Delete</a>
+                          <a href="editcont.php?eid=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-sm btn-warning me-2">Edit</a>
+                          <a href="contribution.php?did=<?php echo htmlentities($contributor['id']); ?>" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Are you sure you want to delete?'); ">Delete</a>
                         </div>
                       </td>
                       <td><?php echo htmlentities($contributor['creator'] ) ?></td>

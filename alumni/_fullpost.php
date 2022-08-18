@@ -16,13 +16,16 @@
         if(empty($singlePost))
         {
             $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
-             redirect_to('index.php'); 
+            //  redirect
+            echo "<script>window.location='index.php';</script>";
+
         }
     }    
     else if(!isset($_GET['id']) || empty($_GET['id']))
     {
         $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
-        redirect_to('index.php'); 
+        //  redirect
+        echo "<script>window.location='index.php';</script>";
     }
 
 

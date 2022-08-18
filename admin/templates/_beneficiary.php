@@ -50,6 +50,15 @@
     
   }
 
+  //change contribution status
+  if(isset($_GET['benstatus']))
+  {
+    if(!empty($_GET['benstatus'])){
+      // echo "<script>alert('entered; here');</script>";
+      $admin->changeContributionStatus();
+    }
+  }
+
     // fetch all categories
   $allBenefitCategories = $admin->getBenefitCategory();
   $allBenefeciaries = $admin->getBeneficiary("");
@@ -126,6 +135,7 @@
                   <th>Benefit Type</th>
                   <th>Amount</th>
                   <th>Status</th>
+                  <th>Action</th>
                   <th>Added By</th>
                 </tr>
               </thead>
@@ -149,15 +159,29 @@
                   <td><?php echo htmlentities($alumnis['amount'] ) ?></td>
                   <td>
                    <?php 
-                    if($alumnis['status']=="in-progress")
+                    if($alumnis['status']=="open")
                     {
-                       echo  '<span class="badge bg-warning">In-progress</span> ';
+                       echo  '<span class="badge bg-warning text-dark">In-progress</span> ';
                     }
-                    else if ($alumnis['status']=="done")
+                    else if ($alumnis['status']=="closed")
                     {
                       echo  '<span class="badge bg-success">Done</span> ';
                     }
                    ?>
+                  </td>
+                  <td>
+                    <div class="button-group button-group-sm">
+                    <?php 
+                    if($alumnis['status']=="open")
+                    {
+                       echo  '<a href="beneficiary.php?benid='.$alumnis['ben_id'].'&benstatus='.$alumnis['status'].'" class="btn btn-danger btn-sm cont-status-btn close-cont" value="'.$alumnis['ben_id'].'">Close</a>';
+                    }
+                    else if ($alumnis['status']=="closed")
+                    {
+                      echo  '<a href="beneficiary.php?benid='.$alumnis['ben_id'].'&benstatus='.$alumnis['status'].'" class="btn btn-success btn-sm cont-status-btn close-cont" value="'.$alumnis['ben_id'].'">Open</a>';
+                    }
+                   ?>                      
+                    </div>
                   </td>
                   <td><?php echo htmlentities($alumnis['creator'] ) ?></td>
     

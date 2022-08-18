@@ -83,18 +83,18 @@
                       <div class="card-body bg-dark text-white">
                             <div class="form-group mb-2">
                                 <label for="heading" class="mb-1">Heading</label>
-                                <input type="text" id="heading" name="heading" class="form-control">
+                                <input type="text" id="heading" name="heading" class="form-control form-control-sm ">
                                 <small class="lead text-danger float-end" style="font-size:13px;">Please give a short descriptive heading (eg. abc's wedding or outdooring)</small>
                             </div>
                             <div class="form-group mb-2">
                               <label for="noticeDesc" class="mb-1">Description</label>
-                              <textarea class="form-control" name="noticeDesc" id="noticeDesc" cols="30" rows="5"></textarea>
+                              <textarea class="form-control form-control-sm " name="noticeDesc" id="noticeDesc" cols="30" rows="5"></textarea>
                             </div>
                             <div class="row">
                                   <div class="col-lg-6">
                                     <div class="form-group mb-2">
                                           <label for="notice_type" class="mb-1">Notice Type</label>
-                                          <select name="notice_type" id="notice_type" class="form-control">
+                                          <select name="notice_type" id="notice_type" class="form-select form-select-sm">
                                             <option value="" >--select notice type--</option>
                                             <?php foreach($allNoticeCategories as $cat): ?>
                                             <option value="<?php echo htmlentities($cat['title']); ?>" ><?php echo htmlentities($cat['title']); ?></option>
@@ -104,7 +104,7 @@
                                   </div>
                                   <div class="col-lg-6 mb-2">
                                        <label for="dueDate" class="mb-1">Due Date</label>
-                                          <input type="date" name="dueDate" id="dueDate" class="form-control" value="2021/1/1" min="2021/1/1" max="2031/1/1">
+                                          <input type="date" name="dueDate" id="dueDate" class="form-control form-control-sm" value="2021/1/1" min="2021/1/1" max="2031/1/1">
                                           <small class="lead text-danger float-end" style="font-size:13px;">This can be empty if notice has no due date</small>
                                   </div>
 
@@ -164,8 +164,8 @@
                   <td><?php echo htmlentities($notice['creator']) ?></td>
                   <td class="text-center">
                       <div class="btn-group" role="group">                    
-                        <a href="editnotice.php?nteid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-success me-2">Edit</a>
-                        <a href="notice.php?ntdid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-danger ms-1" onclick="return confirm('Are You Sure You Want To Delete This Notice?'); ">Delete</a>
+                        <a href="editnotice.php?nteid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-sm btn-success me-2">Edit</a>
+                        <a href="notice.php?ntdid=<?php echo htmlentities($notice['id']); ?>" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Are You Sure You Want To Delete This Notice?'); ">Delete</a>
                       </div>
                   </td>
                  
@@ -186,11 +186,11 @@
                   <div class="card-body bg-dark text-white">
                     <div class="form-group mb-2">
                       <label for="title" class="mb-1">Category Title</label>
-                      <input type="text" id="title" name="title" class="form-control">
+                      <input type="text" id="title" name="title" class="form-control form-control-sm ">
                     </div>
                     <div class="row">
                         <div class="col-lg-6  text-center text-white mb-2">
-                          <a href="index.php" class="btn btn-warning py-2" style="width:100%;height:60px;"> <span> <i class="fas fa-arrow-left"></i></span> Back To Dashboard</a>
+                          <a href="index.php" class="btn btn-sm btn-warning py-2" style="width:100%;height:60px;"> <span> <i class="fas fa-arrow-left"></i></span> Back To Dashboard</a>
                         </div>
                         <div class="col-lg-6 text-center text-white mb-2">
                           <button class="btn btn-success"  type="submit" name="notice_cat" style="width:100%;height:60px;"> <span> <i class="fas fa-check"></i></span> Pubish</button>

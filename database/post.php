@@ -39,6 +39,28 @@
                     }
 
                 }
+                else if(isset($_POST['addkosagram_post']))
+                {
+                    $image = $_FILES['image']['name'];
+                    $ImgTargetDir  = "../assets/uploads/".basename($_FILES['image']['name']);
+                    $post_desc =  $this->db->mysqli->real_escape_string($_POST['post_desc']);
+                    $author =$_SESSION['UserName'];
+
+                    $sql = "INSERT INTO kosagram(author,post_desc,post_img) VALUES ('$author','$post_desc','$image')";
+
+                    if($this->db->conn->query($sql) === TRUE)
+                    {
+                        //move file into uploads folder
+                        move_uploaded_file($_FILES['image']['tmp_name'], $ImgTargetDir);                        
+                        $_SESSION["SuccessMsg"] = "Kosagram Post added successfully!";
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Failed To Add Kosagram Post!".$sql;
+
+                    }
+
+                }
             }
             
         }

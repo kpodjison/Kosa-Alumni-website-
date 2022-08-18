@@ -86,12 +86,12 @@
                             <td><?php echo htmlentities($cmt_item['comment']); ?></td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="comments.php?cid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-success">Approve</span> </a>
-                                    <a href="comments.php?dcid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-danger">Delete</span> </a>
+                                    <a href="comments.php?cid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-sm btn-success">Approve</span> </a>
+                                    <a href="comments.php?dcid=<?php echo $cmt_item['id'];?>" class="m-1" onclick="return confirm('Are you sure you want to delete?'); "> <span class="btn btn-sm btn-danger">Delete</span> </a>
                                 </div>
                             </td>
                             <td style="min-width:130px;">
-                                <a href="../fullpost.php?id=<?php echo $cmt_item['post_id'];?>" target=_blank> <span class="btn btn-primary">Live Preview</span>  </a>
+                                <a href="../fullpost.php?id=<?php echo $cmt_item['post_id'];?>" target=_blank> <span class="btn btn-sm btn-primary">Live Preview</span>  </a>
                             </td>
                         </tr>
                         <?php endforeach;?>
@@ -131,12 +131,12 @@
                             <td><?php echo htmlentities($cmt_item['comment']); ?></td>
                             <td >
                                 <div class="btn-group" role="group" style="min-width:210px;">
-                                    <a href="comments.php?ucid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-warning">Dis-Approve</span> </a>
-                                    <a href="comments.php?dcid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-danger">Delete</span> </a>
+                                    <a href="comments.php?ucid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-sm btn-warning">Dis-Approve</span> </a>
+                                    <a href="comments.php?dcid=<?php echo $cmt_item['id'];?>" class="m-1" onclick="return confirm('Are you sure you want to delete?'); "> <span class="btn btn-sm btn-danger">Delete</span> </a>
                                 </div>
                             </td>
                             <td style="min-width:130px;">
-                                <a href="../fullpost.php?id=<?php echo $cmt_item['post_id'];?>" target=_blank> <span class="btn btn-primary">Live Preview</span>  </a>
+                                <a href="../fullpost.php?id=<?php echo $cmt_item['post_id'];?>" target=_blank> <span class="btn btn-sm btn-primary">Live Preview</span>  </a>
                             </td>
                         </tr>
                         <?php endforeach;?>

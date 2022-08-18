@@ -11,7 +11,7 @@
 }
 
 .bg-trasp {
-  background: #0004;
+  background: rgba(0, 0, 0, 0.2666666667);
 }
 
 .bg-kosa-blue {
@@ -52,6 +52,43 @@
 }
 
 /*admin style imports*/
+.alumni_modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 200px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+.alumni_modal .modal_content {
+  padding: 20px;
+  margin: auto;
+}
+.alumni_modal .close_btn {
+  position: fixed;
+  right: 0;
+  margin-right: 18px;
+  font-weight: bold;
+}
+.alumni_modal .close_btn:hover,
+.alumni_modal .close_btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /*main page style*/
 /*about us style*/
 .top_container {
@@ -61,8 +98,11 @@
   height: 100vh;
 }
 .top_container .kosa_about {
-  background: #0004;
+  background: rgba(0, 0, 0, 0.2666666667);
   margin-top: 50px;
+}
+.top_container .kosa_about span {
+  font-size: 18px;
 }
 
 .top_container h1 {
@@ -82,7 +122,6 @@ footer {
   background: #000;
   color: #00b8e6;
   font-size: 28px;
-  height: 40px;
   text-align: center;
 }
 
